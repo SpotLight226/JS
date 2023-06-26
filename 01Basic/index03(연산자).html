@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var num1 = "10";
+      var num2 = 10;
+
+      /* ==, != 은 값(value)만 비교한다 */
+      console.log(num1 == num2); // true
+      console.log(num1 != num2); // false
+
+      /* ===, !===은 값(value)과 타입(type)도 비교한다 */
+      console.log(num1 === num2); /* false */
+      console.log(num1 !== num2); /* true */
+
+      /* undefined 와  null 은 둘 다 값이 없다 */
+      /* undefined = 초기화 X, null = 값이 존재 X */
+      var a; // undefined
+      var b = null; // null
+      /* 값(value)만 비교하므로  */
+      console.log(a == b); // true
+      console.log(a != b); // false
+      /* 값(value)과 타입(type)을 비교하므로 */
+      console.log(a === b); // false
+      console.log(a !== b); // true
+
+      // a, b 를 출력하고 비교결과를 출력 ( 출력문 몇 개씩 작성 X )
+      console.log(a, b, a == b);
+      console.log(a, b, a != b);
+      console.log(a, b, a === b);
+      console.log(a, b, a !== b);
+    </script>
+  </body>
+</html>

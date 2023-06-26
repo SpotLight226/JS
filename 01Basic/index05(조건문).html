@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var num = 10;
+      // 조건문 if 문
+      // num이 10인지 판단해서 true, false 출력
+      if (num == 10) {
+        console.log(true);
+      } else {
+        console.log(false);
+      }
+
+      // 형변환 parseInt, parseFloat
+      var a = parseInt(Math.random() * 100); // 랜덤 숫자 -> (int) X(자바 형변환 X)
+      console.log(a);
+
+      var grade = "F";
+      if (a >= 70) {
+        grade = "A";
+      } else if (a >= 60) {
+        grade = "B";
+      } else {
+        grade = "C";
+      }
+
+      console.log("점수:", a, "등급:", grade);
+
+      console.log("------------------------------------");
+
+      //   console.log(a / 10); // 정수 / 정수 => 실수
+
+      // 자바의 switch문 사용법과 동일
+      switch (grade) {
+        case "A":
+          console.log("A학점");
+          break;
+        case "B":
+          console.log("B학점");
+          break;
+        case "C":
+          console.log("C학점");
+          break;
+
+        default:
+          console.log("F");
+          break;
+      }
+    </script>
+  </body>
+</html>

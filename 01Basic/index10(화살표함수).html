@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //arrow function = ES6
+
+      /* 매개변수를 2개 받는 익명함수 */
+      var aaa = function (a, b) {
+        return a + b;
+      };
+
+      //   화살표 함수 : function 지우고, 매개변수 뒤에 =>
+      // 1st
+      var bbb = (a, b) => {
+        return a + b;
+      };
+
+      //2nd : 함수의 내용이 한 줄 이라면 {}, return 생략 가능 : 두 줄 이상이라면 {}, return 생략 불가
+      var ccc = (a, b) => a + b;
+    </script>
+  </body>
+</html>

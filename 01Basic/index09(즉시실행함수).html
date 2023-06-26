@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 즉시 실행함수 -> 익명함수를 ()로 감싸고 ();(호출)하는 것 */
+      //   (function () {
+      //     console.log("즉시 실행함수");
+      //   })();
+
+      /* 페이지 시작시 실행시킬 함수를 (즉시 실행 함수)로 묶어주면 가독성이 좋다 */
+      /* 매개변수를 받을 수 있다 */
+      (function (a, b, c) {
+        console.log(a, b, c);
+        console.log("즉시 실행함수에서 func 실행");
+        func1();
+        func2();
+      })("홍길동", 100, 3.14);
+
+      console.log("-------------------------------");
+
+      console.log("func를 따로 실행");
+      func1();
+      func2();
+      function func1() {
+        console.log("func1 실행됨");
+      }
+
+      function func2() {
+        console.log("func2 실행됨");
+      }
+    </script>
+  </body>
+</html>

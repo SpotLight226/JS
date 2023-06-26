@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 함수 레벨 스코프 */
+      var num = 10;
+
+      if (true) {
+        var num = 20; // 이런 식으로 선언하면 안됨
+      }
+
+      console.log(num); // if문 안에서 선언한 변수도, 전역변수 취급
+
+      console.log("-------------------------");
+
+      /* 블록 레벨 스코프 */
+
+      var a = 10;
+      function func1() {
+        var a = 50; // 함수 안에서만 쓸 수 있는 지역 변수 -> 함수 안에서만 50이다
+        var a = 20; // 같은 이름 변수를 선언 가능
+      }
+
+      func1();
+      console.log("a:", a); // var변수는 함수 안에서 만드는 변수가 지역 변수
+
+      for (var i = 1; i <= 10; i++) {}
+      // for문에서 선언된 i는 함수레벨 변수로 취급된다
+      console.log("i:", i);
+
+      console.log("------------------------");
+
+      //les 변수 es6 => 변수의 범위는 중괄호 = 자바와 똑같음
+      let b = 10;
+      if (true) {
+        let b = 20; // let변수는 {}안에서 지역 변수다
+      }
+      console.log("b:", b);
+
+      let c = 10;
+      function func2() {
+        let c = 20;
+        // let c = 50; // {]안에서 같은 이름 변수를 선언할 수 없다
+      }
+      func2();
+      console.log("c:", c);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //함수로 만드는 객체의 모형(많이 사용X)
+
+      function person(name) {
+        this.name = name; // person 객체의 멤버변수
+        this.age = 10; // 임의로 정한 값 ( 매개변수로 받아서 위와 같이 설정할 수 있다)
+
+        this.info = function () {
+          console.log(this.age, this.name); // this를 붙여서 person객체의 멤버변수 임을 나타낸다
+        };
+      }
+
+      var obj = new person("홍길동"); // 객체를 생성
+      console.log(obj);
+      console.log(obj["age"]);
+      console.log(obj.age);
+      console.log(obj.name);
+      obj.info();
+    </script>
+  </body>
+</html>

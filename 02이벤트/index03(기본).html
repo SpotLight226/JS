@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // JS는 선언구문의 순서가 중요하다
+      // 화면에서 1개만 쓸 수 있다
+      // 화면 html로드가 끝난 이후에 실행된다
+
+      window.onload = function () {
+        var btn = document.getElementById("btn");
+        console.log("window.onload 작성 O", btn);
+
+        btn.onclick = function () {
+          console.log("OKAY???");
+        };
+      };
+
+      // null -> window.onload 작성 X
+      var btn = document.getElementById("btn");
+
+      console.log("window.onload 작성 X", btn); // script의 요소 취득 명령어가 '취득할 요소'의 앞에 있기 때문에, null
+
+      // 이 script 코드가 실행될 때, 밑의 button 태그는 없는 것과 동일하다
+      //   btn.onclick = function () {
+      //     console.log("OKAY???");
+      //   };
+    </script>
+
+    <button id="btn">기본 이벤트(onload)</button>
+  </body>
+</html>

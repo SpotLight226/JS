@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+      // JS에서 객체는 {}로 표기하고, 자바의 맵과 같다
+
+      var person = {
+        /* 키(key): 값(value) ->  키는 꼭 문자열이 아니어도 OK */
+        name: "홍길동",
+        age: 20,
+        arr: [1, 2, 3],
+      };
+
+      console.log(typeof person); // object (객체)
+
+      //JS {}(객체)에 접근하는 방식은 2가지 있다
+
+      // 1  . 으로 접근 (JAVA의 참조변수 처럼)
+      console.log(person.name);
+      console.log(person.age);
+      console.log(person.arr);
+      console.log(person.arr[0]); // person 안의 배열 arr의 인덱스(0)의 요소
+
+      // 2  객체['키'] => 반드시 문자열 형식으로 사용
+      // JS 개발자들은 일반적으로 이 방식을 사용한다
+      console.log(person["name"]); // person의 키(key)는 문자열(" ") 이다 ->
+      console.log(person["age"]);
+      console.log(person["arr"]);
+      console.log(person["arr"][0]); // person 안의 배열 arr의 인덱스(0)의 요소
+
+      console.log("-----------------------------");
+
+      //객체안에 객체
+      var exam = {
+        kor: 30,
+        eng: 40,
+      };
+
+      var park = {
+        name: "박수",
+        age: 20,
+        exam: exam, // 키(key) "exam"은 var exam(객체)을 참조한다
+      };
+
+      console.log(park);
+      console.log(park.name);
+      console.log(park["exam"]["kor"]); // park 객체 안에 있는 exam 객체에서 키(key) 'kor'에 접근한다
+
+      //객체안에 함수
+      var obj = {
+        func: function () {
+          // 키(key)는 func 고 값(value)는 function 이다
+          console.log("호출됨");
+        },
+      };
+
+      //   obj["func"]();  // 이렇게도 접근 가능 ( obj에서 키 'func' 의 값은 function 이다 거기서 실행 () )
+      obj.func();
+
+      //리스트 안에 객체
+      var arr = [
+        { id: 1, name: "홍길동" },
+        { id: 2, name: "이순신" },
+        { id: 3, name: "신사임당" }, // JS는 , 가 달려있어도 상관 X
+      ];
+
+      console.log(arr);
+
+      // 반복문으로 id와 name을 출력
+      for (var i = 0; i < arr.length; i++) {
+        console.log("키:", arr[i]["id"]); //arr[i].id 도 OK
+        console.log("값:", arr[i]["name"]); //arr[i].name 도 OK
+      }
+      //향상된 for문 (for/in)
+      for (var x in arr) {
+        // var x = index
+        console.log(arr[x].id);
+        console.log(arr[x].name);
+      }
+    </script>
+  </body>
+</html>

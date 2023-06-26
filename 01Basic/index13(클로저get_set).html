@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //클로저를 이용한 setter
+      /*
+      function obj() {
+        var name = "홍길동";
+        // setter
+        return function (aaa) {
+          name = aaa;
+          return name;
+        };
+      }
+
+      var result = obj(); // result가 obj의 참조변수다 innerfunction에 접근가능
+      console.log(result("이순신"));
+         */
+
+      function person() {
+        var name = "홍길동";
+
+        // return{키: 값}; //객체
+        return {
+          setName: function (aaa) {
+            name = aaa;
+          },
+          getName: function () {
+            return name;
+          },
+        };
+      }
+
+      var obj = person(); // result가 person의 참조 변수다
+      obj.setName("이순신"); // obj.setName으로 person() 내부의 name 변수를 '이순신으로 바꾼다'
+      console.log(obj.getName()); // obj.getName으로 person() 내부의 name 변수를 받아온다
+    </script>
+  </body>
+</html>
