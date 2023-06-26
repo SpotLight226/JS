@@ -28,5 +28,29 @@
         alert("표준 이벤트");
       });
     </script>
+
+    <button id="btn2">표준이벤트는 동일이벤트 트리거가 된다</button>
+
+    <script>
+      var btn2 = document.getElementById("btn2");
+      // 기본 이벤트 방식 -> 동일 이벤트 체이닝 X
+      /*
+        btn2.onclick = function () {
+          alert("1번 이벤트");
+        };
+
+        btn2.onclick = function () {
+          alert("2번 이벤트");
+        };
+        */
+
+      // 표준 이벤트 방식 -> 동일 이벤트 체이닝 O
+      btn2.addEventListener("click", function () {
+        alert("1번 이벤트");
+      });
+      btn2.addEventListener("click", function () {
+        alert("2번 이벤트");
+      });
+    </script>
   </body>
 </html>

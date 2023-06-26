@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="check2(this)" id="a">1</button>
+    <button onclick="check2(this)" id="b">2</button>
+    <button onclick="check2(this)" id="c">3</button>
+    <button onclick="check2(this)" id="d">4</button>
+
+    <script>
+      /*
+      function check2(a) {
+        switch (a.innerHTML) {
+          case "1":
+            a.innerHTML = a.id;
+            break;
+          case "2":
+            a.innerHTML = a.id;
+            break;
+          case "3":
+            a.innerHTML = a.id;
+            break;
+          case "4":
+            a.innerHTML = a.id;
+            break;
+        }
+      }
+      */
+
+      // 태그의 아이디로 내부 글을 변경
+      function check2(a) {
+        a.innerHTML = a.id;
+      }
+    </script>
+  </body>
+</html>

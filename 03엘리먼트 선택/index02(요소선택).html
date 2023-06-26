@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>css문법으로 엘리먼트 받기</h3>
+
+    <ul class="box">
+      <li>안녕</li>
+      <li>hello</li>
+      <li>bye</li>
+    </ul>
+
+    <button id="btn">쿼리셀렉터</button>
+
+    <script>
+      var btn = document.querySelector("#btn"); // id가 btn인 태그를 가져온다
+
+      // 단 하나만 -> 객체
+      //   var li = document.querySelector(".box li"); // 클래스 blox의 li 한 개만
+
+      // 배열
+      var li = document.querySelectorAll(".box li"); // 여러 개 얻음
+
+      btn.addEventListener("click", function () {
+        console.log(li); // 한 개만 출력
+
+        for (var i = 0; i < li.length; i++) {
+          console.log(li[i]);
+          // 반복을 돌면서, li의 innerHTML을 변경한다
+          li[i].innerHTML = "바껴라!!!";
+        }
+      });
+    </script>
+  </body>
+</html>
