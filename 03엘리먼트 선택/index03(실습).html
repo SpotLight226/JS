@@ -27,10 +27,31 @@
       btn[1].onclick = function () {
         if (number.value == 0) {
           alert("0보다 작을 수 없습니다");
+          return false;
         } else {
           number.value--;
         }
       };
+
+      /*
+      var number = document.querySelector("#number");
+
+      var a = document.querySelector('.a');
+      a.addEventListener('click', function() {
+        number.value++;
+      })
+      
+      //onclick="add(this)" 를 버튼에 추가했을 시
+      function add(a) { 
+        
+        if(a.innerHTML === "+"){
+          a.value++;
+        } else if(number.value <= 0){
+          alert("0보다 작을 수 없습니다");
+          return false;}
+        } else { a.value--;}
+      }
+      */
     </script>
   </body>
 </html>

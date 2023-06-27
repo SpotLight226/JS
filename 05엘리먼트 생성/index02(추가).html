@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>할 일 목록</h3>
+    <h6>createElement 예시 : 부모 노드, 자식 노드</h6>
+
+    <input type="text" class="todo" placeholder="할 일을 작성하세요" />
+    <button id="btn">할일 목록 추가하기</button>
+    <ul class="list">
+      <!-- <li><a href="http://www.naver.com">할 일</a></li> -->
+    </ul>
+
+    <script>
+      var list = document.querySelector(".list"); // ul
+      var todo = document.querySelector(".todo"); // input
+      var btn = document.getElementById("btn");
+
+      btn.addEventListener("click", function () {
+        // li , a 태그를 생성 => 문자열로 작성해야 한다!!
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        // createTextNode : 문자열 노드를 생성한다
+        var text = document.createTextNode(todo.value); // 사용자가 입력한 값을 textNode로 만든다
+
+        // a 태그의 속성에서 href에 주소를 넣는다 -> 속성에 접근
+        a.href = "http://www.naver.com";
+        // a.innerHTML = "문자열"; // 가장 편한 방법 OK
+
+        // appendChild : () 안의 값을 자식으로 추가한다 : 노드(Element) 만 추가할 수 있다
+        // a.appendChild("문자열"); // 문자열은 element가 아님 => Error
+        // 자식부터 들어가야 한다
+        a.appendChild(text); // 1. text ( 문자열 노드 )를 a의 자식으로 넣는다
+        li.appendChild(a); // 2. a 를 li의 자식으로 넣는다
+        list.appendChild(li); // 3. ul의 자식으로 li 추가
+
+        //input 태그의 입력창을 비우기
+        todo.value = "";
+      });
+
+      /*
+      1. document.createElement 로 li, a 태그를 생성한다
+      2. document.createTextNode 로 textNode를 생성한다
+      3. a 태그의 속성에 접근해 수정한다  a.href = "주소"
+      4. appendChild 를 사용하여 각 태그에 자식으로 추가한다 
+         이 때, 가장 밑의 자식부터 들어가야 한다!!!
+      ** : 입력 창을 비우려면 input 태그의 value를 ""(공백) 으로 만든다   
+      */
+    </script>
+  </body>
+</html>

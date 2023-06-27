@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img
+      src="img/1.jpg"
+      alt="이미지"
+      class="img"
+      width="400"
+      style="border: 4px solid #000"
+    />
+
+    <select class="sel">
+      <option value="1.jpg">봄</option>
+      <option value="2.jpg">여름</option>
+      <option value="3.jpg">가을</option>
+      <option value="4.jpg">겨울</option>
+    </select>
+
+    변경할 색상: <input type="color" class="col" />
+
+    <script>
+      // 각 class 명으로 태그를 가져온다
+      var img = document.querySelector(".img");
+      var sel = document.querySelector(".sel");
+      var col = document.querySelector(".col");
+
+      sel.addEventListener("change", function () {
+        img.src = "img/" + sel.value;
+      });
+
+      col.addEventListener("change", function () {
+        img.style.border = "4px solid " + col.value;
+      });
+
+      /*
+      // 기본 이벤트 모델
+      sel.onchange = function () {
+        img.src = "img/" + sel.value;
+      };
+      col.onchange = function () {
+        img.style.border = "4px solid " + col.value;
+      };
+      */
+    </script>
+  </body>
+</html>

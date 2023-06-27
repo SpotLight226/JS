@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>할일 목록 만들기</h2>
+
+    <div class="name-set">
+      <input
+        class="name-set__input"
+        type="text"
+        placeholder="이름을 입력하세요"
+      />
+      <button class="name-set__btn">확인</button>
+    </div>
+
+    <div>
+      <input
+        class="content-add__input"
+        type="text"
+        placeholder="당신의 할일을 적으세요"
+      />
+      <button class="content-add__btn">확인</button>
+    </div>
+
+    <ul class="todo-list"></ul>
+
+    <script>
+      var todo_list = document.querySelector(".todo-list");
+
+      var content_input = document.querySelector(".content-add__input");
+      var content_btn = document.querySelector(".content-add__btn");
+
+      // 이름 입력 및 웹페이지에 출력
+      var name_set = document.querySelector(".name-set");
+      var name_input = name_set.querySelector(".name-set__input");
+      var name_btn = name_set.querySelector(".name-set__btn");
+
+      name_btn.addEventListener("click", function () {
+        if (name_input.value === "") {
+          // 이름이 입력안되어 있으면 경고창
+          alert("이름을 입력하세요");
+        } else {
+          // 입력되어 있으면 입력창, 버튼 투명 0으로 만들고, 환영문구 출력
+          name_input.style.opacity = 0;
+          name_btn.style.opacity = 0;
+          name_btn.disabled;
+
+          var title = document.createElement("h3");
+
+          console.log(name_input.value);
+          title.innerHTML = name_input.value + "님 환영합니다";
+          console.log(title);
+          name_set.appendChild(title);
+        }
+      });
+
+      // 할일 입력
+      content_btn.addEventListener("click", function () {
+        if (content_input.value === "") {
+          alert("할 일을 입력하세요");
+        } else {
+          // li 태그 생성
+          var li = document.createElement("li");
+          // li 태그 내부의 문장을 input으로 설정
+          li.innerHTML = content_input.value;
+
+          // li 삭제 버튼
+          var del_btn = document.createElement("button");
+          del_btn.innerHTML = "X";
+          del_btn.addEventListener("click", del);
+
+          // li에 버튼 추가
+          li.appendChild(del_btn);
+          // ul에 li 추가
+          todo_list.appendChild(li);
+
+          // 입력창 공백으로
+          content_input.value = "";
+        }
+      });
+
+      // 할일 삭제 버튼
+      function del() {
+        var listItem = this.parentNode;
+        todo_list.removeChild(listItem);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box1">
+      <p>기존에 존재하던 태그</p>
+    </div>
+
+    <button id="btn">innerHTML1</button>
+
+    <script>
+      var box1 = document.querySelector(".box1"); // div ( 박스 )
+      var btn = document.getElementById("btn"); // btn
+
+      btn.onclick = function () {
+        box1.innerHTML = "기존에 있던 태그는 지워진다";
+      };
+    </script>
+
+    <hr />
+
+    <h3>태그 안에 새로운 태그를 생성하기</h3>
+
+    <div class="box2">
+      <!-- <input type="checkbox" name="aaa" class="bbb" checked /> -->
+    </div>
+
+    <button id="btn2">innerHTML2</button>
+
+    <script>
+      var box2 = document.querySelector(".box2");
+      var btn2 = document.getElementById("btn2");
+      btn2.onclick = function () {
+        // 클릭시, box2 밑에 checkbox를 추가
+
+        // 데이터를 태그 형식으로 작성하여, 버튼 클릭시, checkbox 생성
+        box2.innerHTML =
+          '<input type="checkbox" name="aaa" class="bbb" checked />체크박스1';
+
+        // 여러개 만들시, 문자열의 합을 이용한다
+      };
+    </script>
+
+    <hr />
+
+    <h3>
+      태그 안에 새로운 태그를 여러 개 생성하기 <br />
+      문자열을 누적시킨뒤, innerHTML에 대입시킨다
+    </h3>
+
+    <div class="box3"></div>
+
+    <button id="btn3">innerHTML3</button>
+
+    <script>
+      var box3 = document.querySelector(".box3");
+      var btn3 = document.getElementById("btn3");
+      btn3.onclick = function () {
+        // 체크박스를 10개 만들기
+        // 이런 식으로 작성하면, 늘 box3 태그 안의 내용을 덮어씌우기 때문에 1개만 생성된다
+        // for (var i = 0; i < 10; i++) {
+        //   box3.innerHTML =
+        //     '<input type="checkbox" name="aaa" class="bbb" checked />체크박스1';
+        // }
+
+        var sum = "";
+        for (var i = 1; i <= 10; i++) {
+          // sum 변수에 input태그를 누적한 뒤, innerHTMl에 sum을 대입한다
+          sum +=
+            '<input type="checkbox" name="aaa" class="bbb" checked />체크박스' +
+            i;
+        }
+        box3.innerHTML = sum;
+      };
+    </script>
+  </body>
+</html>

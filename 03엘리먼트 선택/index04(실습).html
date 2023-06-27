@@ -28,29 +28,52 @@
 
     <script>
       var sheats = document.getElementsByName("seat");
+      // var sheats = document.querySelectorAll("input[name='seat']"); // name tag가 seat인 input
 
       var btn = document.getElementById("btn");
 
       btn.addEventListener("click", function () {
-        var result = {
-          data: [],
-        };
+        var result = new Array();
 
         for (var i = 0; i < sheats.length; i++) {
           if (sheats[i].checked) {
-            result.data.push(sheats[i].value);
+            result.push(sheats[i].value);
           } else {
             continue;
           }
         }
 
-        if (result.data.length == 0) {
+        if (result.length === 0) {
           alert("좌석을 선택해주세요");
         } else {
-          var json = JSON.stringify(result);
-          console.log(json);
+          var obj = JSON.stringify({ data: result });
+          console.log(obj);
         }
       });
+
+      /*
+      // 강사님
+      var sheats = document.querySelectorAll("input[name='seat']");
+
+      btn.onclick = function () {
+        var bool = true;
+        var arr = new Array(); // 빈배열
+        for (var i = 0; i < seat.length; i++) {
+          if (seat[i].checked === true) {
+            bool = false; // 체크되어있음
+            arr.push(seat[i].value); // 좌석번호 추가
+          }
+        }
+
+        if (bool) {
+          // true라면 체크 X
+          alert("좌석체크는 필수입니다");
+        } else {
+          var obj = JSON.stringify({ data: arr });
+          console.log(obj);
+        }
+      };
+      */
     </script>
   </body>
 </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>자기 자신 삭제</h3>
+    <h6>1번 째 방법</h6>
+    <div>
+      <button id="del">삭제버튼</button>
+    </div>
+
+    <script>
+      // #del 태그를 가져온다
+      var del = document.getElementById("del");
+
+      del.onclick = function () {
+        // console.log(del); // 가져온 태그가 자기자신
+        // console.log(this); // 함수의 가르키는 대상이 자기자신
+
+        // 자기자신을 삭제
+        del.remove();
+        this.remove();
+      };
+    </script>
+
+    <hr />
+
+    <h3>하나씩 삭제하기</h3>
+
+    <button id="add">추가하기</button>
+    <button id="remove">삭제하기</button>
+    <!-- appendChild 할 때 사용할 부모가 필요 -> class= list-->
+    <ul class="list"></ul>
+
+    <script>
+      var list = document.querySelector(".list"); // 부모
+
+      var remove = document.getElementById("remove"); // 삭제 버튼
+      var add = document.getElementById("add"); // 추가 버튼
+
+      // 추가 이벤트
+      add.onclick = function () {
+        var li = document.createElement("li"); // li태그 생성
+        li.innerHTML = "삭제테스트";
+        // li를 list에 추가
+        list.appendChild(li);
+      };
+
+      // 삭제 이벤트
+      remove.onclick = function () {
+        // 부모.removeChild( 삭제할 태그 );
+        // list.removeChild();
+
+        //부모.children : 부모 태그의 자식들 을 배열 형태로 반환한다
+        // console.log(list.children);
+        // console.log(list.children[0]); // 첫번째 자식
+        // // 마지막 자식 ( children은 배열이므로 길이의 -1 이 마지막)
+        // // 숫자로 작성하면 X -> 리스트가 바뀔때마다 마지막에 해당하는 것이 달라진다
+        // console.log(list.children[ list.children - 1]);
+        // console.log(list.lastChild); // 마지막 자식
+
+        list.removeChild(list.children[0]); // 첫번째 자식을 지운다 ( 앞에서 부터 지워진다 )
+      };
+    </script>
+  </body>
+</html>

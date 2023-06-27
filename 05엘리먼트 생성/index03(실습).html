@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      table {
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      thead th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" id="addLists">5개추가하기</button>
+    <button type="button" id="addList">1개추가하기</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>교시</th>
+          <th>훈련과목</th>
+          <th>담당자</th>
+          <th>훈련내용</th>
+        </tr>
+      </thead>
+      <tbody class="todoList">
+        <tr>
+          <td class="period"><input type="text" size="3" /></td>
+          <td class="main"><input type="text" /></td>
+          <td class="charge"><input type="text" size="5" /></td>
+          <td class="content"><input type="text" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      var addLists = document.getElementById("addLists"); // 5개 추가하기
+      var addList = document.getElementById("addList"); // 1개 추가하기
+      var todoList = document.querySelector(".todoList"); // 표의 몸체
+
+      // 내가 한 것 : 모든 요소를 만들어서 조립
+      // 5개 추가
+      addLists.addEventListener("click", function () {
+        // tr 만들기
+        for (var i = 0; i < 5; i++) {
+          var tr = document.createElement("tr");
+          // 1칸
+          var td = document.createElement("td");
+          var input = document.createElement("input");
+          input.type = "text";
+          input.size = "3";
+          td.appendChild(input);
+          tr.appendChild(td);
+          // 2칸
+          var td = document.createElement("td");
+          var input = document.createElement("input");
+          input.type = "text";
+          td.appendChild(input);
+          tr.appendChild(td);
+          // 3칸
+          var td = document.createElement("td");
+          var input = document.createElement("input");
+          input.type = "text";
+          input.size = "5";
+          td.appendChild(input);
+          tr.appendChild(td);
+          // 4칸
+          var td = document.createElement("td");
+          var input = document.createElement("input");
+          input.type = "text";
+          td.appendChild(input);
+          tr.appendChild(td);
+          // 1행을 추가 ( todoList 아래에 tr을 추가 )
+          todoList.appendChild(tr);
+        }
+      });
+
+      // 1개 추가
+      addList.addEventListener("click", function () {
+        // tr 만들기
+        var tr = document.createElement("tr");
+
+        var td = document.createElement("td");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.size = "3";
+        td.appendChild(input);
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        var input = document.createElement("input");
+        input.type = "text";
+        td.appendChild(input);
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.size = "5";
+        td.appendChild(input);
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        var input = document.createElement("input");
+        input.type = "text";
+        td.appendChild(input);
+        tr.appendChild(td);
+
+        todoList.appendChild(tr);
+      });
+
+      // 강사님
+      // innerHTML 활용 => 더 쉬움 ★★★★★
+      // innerHTML 을 잘 활용하자
+      // 마지막 태그만 appendChild 로 넣는다
+      addList.addEventListener("click", add);
+      // 재활용 위해서 함수를 만든다
+      function add() {
+        // tr 1개, td 4개, input 4개
+
+        var sum = "";
+        // 문자열을 누적시키고
+        sum += '<td><input type="text" size="3"></td>';
+        sum += '<td><input type="text"></td>';
+        sum += '<td><input type="text" size="5"></td>';
+        sum += '<td><input type="text"></td>';
+        // tr 태그를 만들어서
+        var tr = document.createElement("tr");
+        // tr의 innerHTML에 sum을 넣는다
+        tr.innerHTML = sum;
+        // todoList에 tr 노드를 넣는다 ( 태그의 형태만 appendChild 가 가능하다 )
+        todoList.appendChild(tr);
+      }
+
+      // 5개 추가
+      addLists.addEventListener("click", adds);
+      function adds() {
+        for (var i = 1; i <= 5; i++) {
+          add();
+        }
+      }
+    </script>
+  </body>
+</html>
