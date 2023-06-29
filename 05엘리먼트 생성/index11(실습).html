@@ -124,6 +124,7 @@
           // 첫번째 박스를 block으로, 두번째 박스는 none
           right.children[0].style.display = "block";
           right.children[1].style.display = "none";
+          nameBtn.innerHTML = "이름보기";
 
           // 없을 때
         } else {
@@ -133,6 +134,7 @@
           // 첫번째 박스를 none으로, 두번째 박스는 block
           right.children[0].style.display = "none";
           right.children[1].style.display = "block";
+          nameBtn.innerHTML = "내용보기";
         }
       });
     </script>

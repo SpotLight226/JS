@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>이벤트 위임</h3>
+
+    <p class="title"></p>
+
+    <ul class="box">
+      <li>1. 홍길동</li>
+      <li>2. 홍길자</li>
+      <li>3. 이순신</li>
+      <li>4. 홍길순</li>
+      <li>5. 신사임당</li>
+    </ul>
+
+    <script>
+      // ul태그 전체를 가져온다
+      var box = document.querySelector(".box");
+      var title = document.querySelector(".title");
+
+      box.onclick = function () {
+        // console.log("이벤트위임"); // 모든 li에 이벤트가 걸린다
+        // console.log(this); // this = ul태그 전체
+        // console.log(event.currentTarget); // 실제로 이벤트가 걸려있는 태그
+        // console.log(event.target); // target = li태그 (이벤트가 동작한 태그)
+
+        // 이벤트 위임시 event.target 은 실제 이벤트가 동작한 태그 이다
+        // this 는 ul태그 전체이다
+
+        // 밑의 방식으로 이벤트를 위임할시, ul태그를 선택해도 이벤트가 동작한다
+        // title.innerHTML = event.target.innerHTML;
+
+        // console.dir(event.target.tagName); // 이벤트가 동작한 태그명
+
+        // ul 태그를 선택했을 때, 이벤트가 동작하지 않게 만들어주어야 한다
+        // event.target.tagName : 이벤트가 동작한 태그명
+        // 이벤트가 동작한 태그명이 LI 가 아닐 때는 종료 -> 이렇게 해주면 조건이 간단해짐
+        if (event.target.tagname !== "LI") {
+          return; // 종료
+          // LI 일때만 동작
+        } else {
+          title.innerHTML = event.target.innerHTML;
+        }
+      };
+    </script>
+  </body>
+</html>

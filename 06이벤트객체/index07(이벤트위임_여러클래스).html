@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div class="box">
+        <div>
+          <span>홍길동</span>
+          <button type="button" class="btn sel">선택</button>
+          <button type="button" class="btn del">삭제</button>
+        </div>
+        <div>
+          <span>이순신</span>
+          <button type="button" class="btn sel">선택</button>
+          <button type="button" class="btn del">삭제</button>
+        </div>
+        <div>
+          <span>홍길자</span>
+          <button type="button" class="btn sel">선택</button>
+          <button type="button" class="btn del">삭제</button>
+        </div>
+        <div>
+          <span>심사임당</span>
+          <button type="button" class="btn sel">선택</button>
+          <button type="button" class="btn del">삭제</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var box = document.querySelector(".box");
+      // 이벤트 위임
+      box.onclick = function () {
+        // console.log(event.target);
+        // // 클래스 속성으로 제어
+        // console.log(event.target.classList);
+        // // 클래스 리스트에 sel 이 들어있다면 true
+        // console.log(event.target.classList.contains("sel"));
+
+        var sel = event.target.classList.contains("sel"); // 선택 조건
+        var del = event.target.classList.contains("del"); // 삭제 조건
+        // 선택 버튼
+        if (sel) {
+          // span 을 red로
+          event.target.previousElementSibling.style.color = "red";
+          // 삭제 버튼
+        } else if (del) {
+          // button의 부모의 div를 삭제
+          event.target.parentElement.remove();
+        }
+      };
+    </script>
+  </body>
+</html>

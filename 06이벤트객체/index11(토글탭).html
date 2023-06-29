@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .toggle li {
+        display: inline-block;
+        padding: 15px 20px 14px;
+        width: 25%;
+        text-align: center;
+        border: 1px solid #333;
+        cursor: pointer;
+      }
+
+      .toggle-menu {
+        display: none;
+        width: 100px;
+        height: 400px;
+        background-color: tomato;
+        text-align: center;
+        line-height: 200px;
+        border-radius: 10px;
+      }
+      .active {
+        display: block;
+        animation: shadow-pop-tl 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+      }
+
+      /* 애니메이션 라이브러리사이트: https://michalsnik.github.io/aos/ */
+      /* 애니메이션은 @keyframe 속성으로 선언,  animation속성에서 사용합니다 */
+      @keyframes shadow-pop-tl {
+        0% {
+          -webkit-box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e,
+            0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+          box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e,
+            0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+          -webkit-transform: translateX(0) translateY(0);
+          transform: translateX(0) translateY(0);
+        }
+        100% {
+          -webkit-box-shadow: -1px -1px #3e3e3e, -2px -2px #3e3e3e,
+            -3px -3px #3e3e3e, -4px -4px #3e3e3e, -5px -5px #3e3e3e,
+            -6px -6px #3e3e3e, -7px -7px #3e3e3e, -8px -8px #3e3e3e;
+          box-shadow: -1px -1px #3e3e3e, -2px -2px #3e3e3e, -3px -3px #3e3e3e,
+            -4px -4px #3e3e3e, -5px -5px #3e3e3e, -6px -6px #3e3e3e,
+            -7px -7px #3e3e3e, -8px -8px #3e3e3e;
+          -webkit-transform: translateX(8px) translateY(8px);
+          transform: translateX(8px) translateY(8px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+    태그의 data-xx는 태그에 필요한 중요한 데이터를 저장하는 곳
+    data- 로 시작하고 이름을 지어 사용합니다.
+    -->
+    <section>
+      <ul class="toggle">
+        <li data-id="#toggle1">메뉴1</li>
+        <li data-id="#toggle2">메뉴2</li>
+        <li data-id="#toggle3">메뉴3</li>
+      </ul>
+
+      <div>
+        <div class="toggle-menu active" id="toggle1">토글메뉴1</div>
+        <div class="toggle-menu" id="toggle2">토글메뉴2</div>
+        <div class="toggle-menu" id="toggle3">토글메뉴3</div>
+      </div>
+    </section>
+
+    <script>
+      /*
+	    1. ul에 이벤트 버블링을 이용해서 클릭이벤트를 걸고 클릭되는 타겟의 data-id를 얻습니다.
+        2. toggle-menu의 active속성을 삭제
+        3. data-id의 값에 알맞는 태그에 active속성을 추가하면됩니다.
+		*/
+      // ul 태그를 가져온다
+      var toggles = document.querySelector(".toggle");
+      // 토글 메뉴인 div 를 배열 형태로
+      var menu = toggles.nextElementSibling.children;
+      menu[0].classList.remove("active");
+
+      // ul 태그에 이벤트를 걸어 li에 이벤트를 위임한다
+      toggles.addEventListener("mouseover", function () {
+        // 이벤트 타켓이 LI 가 아니라면 종료
+        if (event.target.tagName !== "LI") {
+          return;
+
+          // LI일 때
+        } else {
+          // 이벤트 타켓의 dataset에 저장된 키(id)에 해당하는 값을 가져온다
+          var value = event.target.dataset.id;
+
+          for (var i = 0; i < menu.length; i++) {
+            // 반복을 돌려서 클래스에 active가 있으면 제거
+            if (menu[i].classList.contains("active")) {
+              menu[i].classList.remove("active");
+            }
+            // div의 id가 태그 dataset에 저장된 value와 같다면
+            if ("#" + menu[i].id === value) {
+              // 클래스에 active를 추가한다
+              menu[i].classList.add("active");
+            }
+          }
+        }
+      });
+
+      toggles.addEventListener("mouseout", function () {
+        if (event.target.tagName !== "LI") {
+          return;
+        } else {
+          for (var i = 0; i < menu.length; i++) {
+            if (menu[i].classList.contains("active")) {
+              menu[i].classList.remove("active");
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

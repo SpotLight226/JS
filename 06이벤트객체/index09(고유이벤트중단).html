@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>고유 이벤트 중단 preventDefault()</h3>
+
+    <ul class="box">
+      <li><a href="https://www.naver.com">1</a></li>
+      <li><a href="https://www.naver.com">2</a></li>
+      <li><a href="https://www.naver.com">3</a></li>
+      <li><a href="https://www.naver.com">4</a></li>
+    </ul>
+
+    <script>
+      var box = document.querySelector(".box");
+      box.addEventListener("click", function () {
+        // 콘솔창에 문자가 나오고, 바로 링크로 이동한다
+        // a태그 또는 submit, form태그 안의 button은 고유 이벤트를 가지고 있다
+        // a태그가 아니면 중단
+        if (event.target.tagName !== "A") {
+          return;
+          // a태그 일때
+        } else {
+          // 태그의 고유 이벤트를 제거한다 ★★★★★
+          event.preventDefault();
+
+          console.log("에이태그 실행??");
+
+          // JS코드를 처리하고, 넘어가게 설정한다
+        }
+      });
+    </script>
+  </body>
+</html>

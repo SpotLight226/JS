@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      ul li {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>다중이벤트 처리</h3>
+    <h6>이벤트 위임으로 처리</h6>
+    <div>
+      <ul class="img-list">
+        <li><img src="img/1.jpg" alt="1" width="100" /></li>
+        <li><img src="img/2.jpg" alt="1" width="100" /></li>
+        <li><img src="img/3.jpg" alt="1" width="100" /></li>
+        <li><img src="img/4.jpg" alt="1" width="100" /></li>
+      </ul>
+      결과:
+      <div class="result">
+        <img src="img/1.jpg" alt="결과" width="300" />
+      </div>
+    </div>
+
+    <script>
+      // li 와 img의 부모인 ul 태그를 가지고 온다
+      var imgs = document.querySelector(".img-list");
+      // 결과의 img를 가지고 온다
+      var result = document.querySelector(".result > img");
+
+      // ul태그에 이벤트를 건다
+      imgs.addEventListener("click", function () {
+        // tagName 이 IMG 가 아니면 종료
+        if (event.target.tagName !== "IMG") {
+          return; //종료
+
+          // tagName이 IMG일 때
+        } else {
+          // 결과의 src 를 이벤트가 동작한 태그의 src로 변경
+          result.src = event.target.src;
+        }
+      });
+    </script>
+  </body>
+</html>

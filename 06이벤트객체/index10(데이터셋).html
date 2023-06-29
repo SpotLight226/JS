@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>dataset - 태그에 정보를 저장하는 속성</h3>
+
+    <h5>
+      규칙 <br />
+      1. data-자유이름 <br />
+      2. 반드시 문자열만 저장가능 <br />
+      3. dataset 에 (키(key) = 자유이름) : 값(value) 형태로 저장된다 <br />
+      4. event.target.dataset.(키) ( or ["키"]) 로 접근할 수 있다 <br />
+      5. data-info='{"id": "aaa", "age": 20}' 처럼 JSON 문자열 처럼 저장 가능
+      <br />
+      이때, JSON 문자열 이므로 숫자를 제외한 모든 값은 ""로 묶는다
+    </h5>
+
+    <ul class="box">
+      <li>
+        <a href="https://www.naver.com" data-info='{"id": "aaa", "age": 20}'
+          >홍길동</a
+        >
+      </li>
+      <li>
+        <a href="https://www.naver.com" data-info='{"id": "bbb", "age": 30}'
+          >이순신</a
+        >
+      </li>
+      <li>
+        <a href="https://www.naver.com" data-info='{"id": "ccc", "age": 40}'
+          >홍길자</a
+        >
+      </li>
+      <li>
+        <a href="https://www.naver.com" data-info='{"id": "ddd", "age": 50}'
+          >신사임</a
+        >
+      </li>
+    </ul>
+
+    <script>
+      var box = document.querySelector(".box");
+      box.onclick = function () {
+        event.preventDefault(); // 고유 이벤트 중단
+
+        // A 태그가 아니라면 중단
+        if (event.target.tagName !== "A") {
+          return;
+        } else {
+          //   console.dir(event.target);
+          // 접근 방법
+          //   console.log(event.target.dataset); // 객체
+          //   console.log(event.target.dataset["info"]); // dataset.info 도 가능
+
+          var value = event.target.dataset.info;
+          var obj = JSON.parse(value);
+          // {id: 'aaa', age: 20}, {id: 'bbb', age: 30}, {id: 'ccc', age: 40}, {id: 'ddd', age: 50}
+
+          console.log(obj);
+        }
+      };
+    </script>
+  </body>
+</html>

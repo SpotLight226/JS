@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>
+      이벤트 객체 - 이벤트가 발생되면, 이벤트 함수 안에 자동으로 이벤트 객체를
+      전달해준다
+    </h3>
+
+    <button id="btn">이벤트객체 확인</button>
+
+    <script>
+      var btn = document.getElementById("btn");
+
+      // 이벤트를 첫번째 매개변수로 전달
+      btn.onclick = function (e) {
+        // event : 태그에 해당하는 모든 이벤트의 정보를 전달한다
+        // console.log(event); //이벤트에 관련한 정보
+
+        // 첫번째 매개변수로 넣어주도록 약속 되어있다
+        console.log(e); // 위의 event와 동일하다
+        console.log(e.target); // 이벤트가 실제 동작한 태그를 반환 (this 를 사용하지 않아도 OK)
+        //event.target 을 이용해서 실행되는 태그를 확인할 수 있다
+      };
+    </script>
+
+    <hr />
+
+    <h3>
+      버튼으로 처리하는 것이 아니라, 동일한 태그 여러 개에 대해서 즉시 반영
+    </h3>
+
+    <p class="title"></p>
+
+    <!-- li를 클릭하면 li.innerHTML 을 p 태그에 넣는다 -->
+
+    <!-- <ul class="box">
+        <!-- 1번 방법 : 인라인이벤트를 추가해서 제어 : 개수 많아지면 힘듬 -->
+    <!-- <li onclick="인라인이벤트">1. 홍길동</li>
+      <li onclick="인라인이벤트">2. 홍길자</li>
+      <li onclick="인라인이벤트">3. 이순신</li>
+      <li onclick="인라인이벤트">4. 홍길순</li>
+      <li onclick="인라인이벤트">5. 신사임당</li>
+    </ul> -->
+
+    <ul class="box">
+      <li>1. 홍길동</li>
+      <li>2. 홍길자</li>
+      <li>3. 이순신</li>
+      <li>4. 홍길순</li>
+      <li>5. 신사임당</li>
+    </ul>
+
+    <script>
+      // 2번 방법 : 반복문으로 다중이벤트 걸기
+      // box 클래스의 li 태그를 모두 가져온다 => 배열 형태
+      var li = document.querySelectorAll(".box > li");
+
+      //   console.log(li);
+      for (var i = 0; i < li.length; i++) {
+        // 반복문으로 모든 li 태그에 이벤트를 추가한다
+        //   console.log(li[i].innerHTML); // 에러 발생
+        //   console.log(i); // 5 => 렉시컬 스코프로 인해 반복문이 다 돌고난 값이 출력된다
+        // 클로저 함수 : 함수가 실행될 때, a의 값을 저장해주기 때문에 0,1,2,3,4
+        /*
+        (function (a) {
+          li[a].onclick = function () {
+            console.log(a);
+          };
+        })(i);
+        */
+
+        li[i].onclick = function () {
+          // i 는 사용할 수 없지만 this 는 사용가능하다
+          //   console.log(this);
+
+          // 이벤트 객체를 사용해서 이벤트가 실행된 태그를 반환받을 수 있다
+          console.log(event.target); // 이벤트가 실행된 li 태그 ★★★★★
+
+          // var title = document.querySelector(".title");
+          // title.innerHTML 와 동일
+          document.querySelector(".title").innerHTML = event.target.innerHTML;
+        };
+      }
+
+      /*
+      // let 변수를 사용하면, 클로저 함수를 사용하지 않아도 OK => ES6
+      for (let i = 0; i < li.length; i++) {
+        li[i].onclick = function () {
+          console.log(i);
+        };
+      }
+      */
+    </script>
+  </body>
+</html>
