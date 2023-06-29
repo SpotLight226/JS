@@ -29,10 +29,11 @@
     <ul class="todo-list"></ul>
 
     <script>
-      var todo_list = document.querySelector(".todo-list");
+      var todo_list = document.querySelector(".todo-list"); // 목록
 
-      var content_input = document.querySelector(".content-add__input");
-      var content_btn = document.querySelector(".content-add__btn");
+      // 할일 입력
+      var content_input = document.querySelector(".content-add__input"); // 할일 입력 창
+      var content_btn = document.querySelector(".content-add__btn"); // 할일 입력 버튼
 
       // 이름 입력 및 웹페이지에 출력
       var name_set = document.querySelector(".name-set");
@@ -71,11 +72,26 @@
           // li 삭제 버튼
           var del_btn = document.createElement("button");
           del_btn.innerHTML = "X";
+          del_btn.type = "button";
           // button이 동적으로 생성될 때, 인라인 OK, 기본 OK, 표준 OK (모든 이벤트 방식 가능)
           // 버튼에 del 이벤트를 추가
           del_btn.addEventListener("click", del);
 
+          // 위로 이동 버튼
+          var up_btn = document.createElement("button");
+          up_btn.innerHTML = "↑";
+          up_btn.type = "button";
+          up_btn.addEventListener("click", up);
+
+          // 아래로 이동 버튼
+          var down_btn = document.createElement("button");
+          down_btn.innerHTML = "↓";
+          down_btn.type = "button";
+          down_btn.addEventListener("click", down);
+
           // li에 버튼 추가
+          li.appendChild(up_btn);
+          li.appendChild(down_btn);
           li.appendChild(del_btn);
           // ul에 li 추가
           todo_list.appendChild(li);
@@ -85,11 +101,54 @@
         }
       });
 
-      // 할일 삭제 버튼
+      // 할일 삭제 이벤트
       function del() {
         // this 는 button 자기 자신 => 자기 자신의 부모 = 자신이 속해있는 li 태그
         var listItem = this.parentElement;
         todo_list.removeChild(listItem);
+      }
+
+      // 위로 이동 이벤트
+      function up() {
+        var current = this.parentElement; // li (button의 부모) 현재행
+        var prev = current.previousElementSibling; // li (현재 프로퍼티의 이전 형제) 이전행
+        // console.log(current, prev);
+
+        // 이전 행이 null이라면 종료
+        if (prev === null) {
+          return;
+          // 아니라면
+        } else {
+          // yes or no 응답을 받아 저장
+          var result = confirm("위로 이동하시겠습니까?");
+          // yes 선택시
+          if (result) {
+            // 이전행의 앞에 현재 행을 삽입
+            todo_list.insertBefore(current, prev);
+          } else return;
+        }
+      }
+
+      // 아래로 이동 이벤트
+      function down() {
+        var current = this.parentElement; // li (button의 부모) 현재행
+        var next = current.nextElementSibling; // li (현재 프로퍼티의 다음 형제) 다음행
+
+        // console.log(current, next);
+
+        // 다음 행이 null이라면 종료
+        if (next === null) {
+          return;
+          // 아니라면
+        } else {
+          // 확인창을 띄워 결과를 result로 반환 받는다
+          var result = confirm("아래로 이동하시겠습니까?");
+          // yes 선택시
+          if (result) {
+            // 다음 행을 현재 행의 앞에 삽입한다
+            todo_list.insertBefore(next, current);
+          } else return;
+        }
       }
     </script>
   </body>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      thead th,
+      tbody td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <button button="type" id="del">일괄 삭제</button>
+    <table>
+      <thead>
+        <th><input type="checkbox" class="allCheck" /></th>
+        <th>번호</th>
+        <th>이름</th>
+        <th>내용</th>
+        <th>날짜</th>
+      </thead>
+
+      <tbody class="table">
+        <tr>
+          <td><input type="checkbox" class="check" /></td>
+          <td>1</td>
+          <td>홍길자</td>
+          <td>안녕!</td>
+          <td>2019-01-01</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="check" /></td>
+          <td>2</td>
+          <td>김길자</td>
+          <td>안녕!</td>
+          <td>2019-01-01</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="check" /></td>
+          <td>3</td>
+          <td>이길자</td>
+          <td>안녕!</td>
+          <td>2019-01-01</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="check" /></td>
+          <td>4</td>
+          <td>고길자</td>
+          <td>안녕!</td>
+          <td>2019-01-01</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      var delBtn = document.getElementById("del"); // 일괄 삭제 버튼
+
+      var allCheck = document.querySelector(".allCheck"); // 일괄 선택
+      var check = document.querySelectorAll(".check"); // 모든 check박스 가져옴 (배열)
+
+      // 일괄 선택
+      allCheck.addEventListener("change", function () {
+        if (allCheck.checked) {
+          for (var i = 0; i < check.length; i++) {
+            check[i].checked = true;
+          }
+        } else {
+          for (var i = 0; i < check.length; i++) {
+            check[i].checked = false;
+          }
+        }
+      });
+
+      // 일괄 삭제
+      delBtn.addEventListener("click", function () {
+        //모든 check 배열을 돈다
+        for (var i = 0; i < check.length; i++) {
+          // checkbox가 true라면
+          if (check[i].checked) {
+            // 2단을 올라가서 tr 을 지운다
+            check[i].parentElement.parentElement.remove();
+          }
+        }
+        allCheck.checked = false;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+
+    <style type="text/css">
+      .center {
+        text-align: center;
+      }
+      .content {
+        overflow: hidden;
+        border: 1px solid #777;
+      }
+      .content,
+      .content .left,
+      .content .right {
+        width: 50%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding: 5px;
+      }
+      .content .right,
+      .content .left {
+        float: left;
+      }
+      .left .inner,
+      .right .inner {
+        border: 1px solid #777;
+        height: 300px;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!--스크립트를 싹 지우고 버튼에 2개로 변경합니다-->
+    <header>
+      <div class="center">
+        <h2>토글형태 활용하기</h2>
+        <button id="btn1" class="dark">어둡게보기</button>
+        <button id="btn2" class="name">이름보기</button>
+        <!--<button id="btn3" class="write">메모장모드</button>-->
+
+        <!--추가-->
+        <hr />
+      </div>
+    </header>
+
+    <section>
+      <div class="content">
+        <div class="left">
+          <div class="inner"><img src="img/pika.gif" /></div>
+        </div>
+        <div class="right">
+          <div class="inner">
+            <p>
+              자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는
+              웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장
+              객체에도 접근할 수 있는 기능을 가지고 있다. 또한 Node.js와 같은
+              런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고
+              있다
+            </p>
+            <a href="https://www.naver.com">위키백과</a>
+          </div>
+          <div class="inner" style="display: none">
+            <p>
+              홍길자 <br />
+              20세 <br />
+              능력단위 <br />
+              Java, Oracle, JSP, CSS, Javascript
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      var darkBtn = document.getElementById("btn1"); // 어둡게 보기
+      var nameBtn = document.getElementById("btn2"); // 이름 보기
+
+      var tag = document.querySelectorAll("a, p, h2"); // a, p, h2 태그 모두 선택 (배열)
+      var left = document.querySelector(".left"); // 왼쪽 박스
+      var right = document.querySelector(".right"); // 오른쪽 박스
+      var info = document.querySelector(".info");
+
+      // 대비 변경 -> 밝게, 어둡게
+      darkBtn.addEventListener("click", function () {
+        // contrast : 대비 가 있을 때
+        if (darkBtn.classList.contains("contrast")) {
+          // 클래스에서 지우고
+          darkBtn.classList.remove("contrast");
+          // 뒷 배경 black으로
+          document.body.style.backgroundColor = "white";
+          // a, p, h2 태그의 문자 색깔을 white으로
+          for (var i = 0; i < tag.length; i++) {
+            tag[i].style.color = "black";
+          }
+          darkBtn.innerHTML = "어둡게보기";
+
+          // contrast : 없을 때
+        } else {
+          // 클래스에 추가하고
+          darkBtn.classList.add("contrast");
+          // 뒷 배경 white로
+          document.body.style.backgroundColor = "black";
+          // a, p, h2 태그의 문자 색깔을 black 으로
+          for (var i = 0; i < tag.length; i++) {
+            tag[i].style.color = "white";
+          }
+          darkBtn.innerHTML = "밝게보기";
+        }
+      });
+
+      // 이름 보기
+      nameBtn.addEventListener("click", function () {
+        // change 가 클래스 명에 있을 때
+        if (nameBtn.classList.contains("change")) {
+          nameBtn.classList.remove("change");
+          // 이미지의 src를 변경
+          left.firstElementChild.firstChild.src = "img/pika.gif";
+          // 첫번째 박스를 block으로, 두번째 박스는 none
+          right.children[0].style.display = "block";
+          right.children[1].style.display = "none";
+
+          // 없을 때
+        } else {
+          nameBtn.classList.add("change");
+          // 이미지의 src를 변경
+          left.firstElementChild.firstChild.src = "img/pika2.gif";
+          // 첫번째 박스를 none으로, 두번째 박스는 block
+          right.children[0].style.display = "none";
+          right.children[1].style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

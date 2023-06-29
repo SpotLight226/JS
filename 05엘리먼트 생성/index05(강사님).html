@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>할일 목록 만들기</h3>
+
+    <!-- ★★★ form 태그 안의 button은 submit 특성을 가진다 -->
+    <form class="myForm">
+      <h3 class="nameTitle"></h3>
+      <input type="text" placeholder="이름을 입력하세요" class="nameInput" />
+      <button type="button" id="nameBtn">확인</button>
+    </form>
+
+    <form class="todoForm">
+      <input type="text" placeholder="할일을 작성하세요" class="todoInput" />
+      <button type="button" id="todoBtn">확인</button>
+
+      <ul class="todoList"></ul>
+    </form>
+
+    <script>
+      // form 태그 내부에서 요소를 찾기 위해서 form태그를 가지고 온다
+      // document 전체에서 찾는 것 보다 효율적이다
+      var myForm = document.querySelector(".myForm");
+
+      var nameTitle = myForm.querySelector(".nameTitle"); // 이름
+      var nameInput = myForm.querySelector(".nameInput"); // 이름 입력
+      var nameBtn = myForm.querySelector("#nameBtn"); // 이름 확인 버튼
+
+      nameBtn.addEventListener("click", function () {
+        nameTitle.innerHTML = nameInput.value;
+        nameInput.value = ""; // 입력창을 초기화(공백)
+
+        nameInput.style.display = "none";
+        nameBtn.style.display = "none";
+      });
+
+      //////////////////////////////////////////////////////////////
+
+      //todoForm 내부에서만 요소를 검색할 수 있게 todoForm태그를 가지고 온다
+      var todoForm = document.querySelector(".todoForm");
+
+      var todoInput = todoForm.querySelector(".todoInput"); // 입력창
+      var todoList = todoForm.querySelector(".todoList"); // 할일 리스트
+      var todoBtn = todoForm.querySelector("#todoBtn"); // 할일 확인 버튼
+
+      todoBtn.addEventListener("click", function () {
+        var text = todoInput.value; // 입력 값
+        todoInput.value = ""; // 공백 ( 입력창 초기화 )
+
+        var li = document.createElement("li");
+        li.innerHTML = text; // li 내부의 value를 text로
+
+        var button = document.createElement("button");
+        button.innerHTML = "삭제";
+
+        // button에 li 삭제 이벤트 추가
+        // button이 동적으로 생성될 때, 인라인 OK, 기본 OK, 표준 OK (모든 이벤트 방식 가능)
+        button.onclick = del;
+
+        li.appendChild(button); // 삭제 버튼을 li에 추가
+
+        todoList.appendChild(li); // ul 태그의 자식으로 li 를 추가
+      });
+
+      //삭제 이벤트
+      function del() {
+        // this = button 자기자신 => button이 속해있는 부모태그 (parentElement) = li => remove() : 삭제
+        this.parentElement.remove();
+      }
+    </script>
+  </body>
+</html>

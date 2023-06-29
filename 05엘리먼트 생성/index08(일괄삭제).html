@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li><input type="checkbox" name="aa" value="1" />자바</li>
+      <li><input type="checkbox" name="aa" value="2" />JS</li>
+      <li><input type="checkbox" name="aa" value="3" />CSS</li>
+      <li><input type="checkbox" name="aa" value="4" />DataBase</li>
+    </ul>
+
+    <button type="button" id="btn">일괄삭제버튼</button>
+
+    <script>
+      // 공통적인 특성을 가진 태그를 다 가지고와서, 조건따라 태그를 선택한다
+      var btn = document.getElementById("btn");
+      // input 태그 중 name이 'aa'인 것을 다 가져온다
+      var arr = document.querySelectorAll('input[name="aa"]');
+
+      btn.onclick = function () {
+        // console.log(arr);
+
+        // arr배열을 반복문으로 돌린다
+        for (var i = 0; i < arr.length; i++) {
+          // arr[i] (input) 의 checked 옵션이 true 일 때, (input의 체크여부)
+          if (arr[i].checked) {
+            // 행을 삭제해야 하므로, input태그의 부모인 li 를 삭제한다
+            arr[i].parentElement.remove();
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

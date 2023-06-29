@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      table {
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      thead th,
+      tbody td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    p
+    <h3>Element의 자리 변경</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>이동</th>
+          <th>번호</th>
+          <th>이름</th>
+          <th>내용</th>
+          <th>날짜</th>
+        </tr>
+      </thead>
+      <!-- 태그에 여러 이벤트를 걸어주는 방법 : 여러 방법이 있으나, 인라인 방식이 가장 쉽다 -->
+      <tbody class="table">
+        <!-- tr 에서 firstChild => td ( button 이 자식으로 있는 태그 ) -->
+        <tr>
+          <td>
+            <button onclick="down(this)">↓</button
+            ><button onclick="up(this)">↑</button>
+          </td>
+          <td>1</td>
+          <td>홍길자</td>
+          <td>안녕!</td>
+          <td>2019-01-01</td>
+        </tr>
+        <tr>
+          <td>
+            <button onclick="down(this)">↓</button
+            ><button onclick="up(this)">↑</button>
+          </td>
+          <td>2</td>
+          <td>이순신</td>
+          <td>반가워</td>
+          <td>2019-02-01</td>
+        </tr>
+        <tr>
+          <td>
+            <button onclick="down(this)">↓</button
+            ><button onclick="up(this)">↑</button>
+          </td>
+          <td>3</td>
+          <td>이순신</td>
+          <td>반가워</td>
+          <td>2019-02-01</td>
+        </tr>
+        <tr>
+          <td>
+            <button onclick="down(this)">↓</button
+            ><button onclick="up(this)">↑</button>
+          </td>
+          <td>4</td>
+          <td>이순신</td>
+          <td>반가워</td>
+          <td>2019-02-01</td>
+        </tr>
+        <tr>
+          <td>
+            <button onclick="down(this)">↓</button
+            ><button onclick="up(this)">↑</button>
+          </td>
+          <td>5</td>
+          <td>이순신</td>
+          <td>반가워</td>
+          <td>2019-02-01</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      function down(x) {
+        // x 는 button 자기 자신이다
+        // parentElement 시, 한 단계 부모 => td
+        // tr 에서 firstChild => td ( button 태그가 자식으로 있는 td 태그 )
+        // nextElementSlibing => 같은 레벨에 있는 button 태그
+        // Element 가 포함되어 있는 속성은 태그 형태 만 가져온다 || Element가 포함되지 않으면, 생략된 text도 포함하여 가져온다
+        /*
+        console.log(x); // 자기 자신
+        console.log(x.parentElement); // 자기가 속해있는 td ( 반드시 태그 형태만 선택 )
+        console.log(x.parentNode); // 문자열 노드가 있다면 문자열도 선택한다
+        console.log(x.nextElementSibling); // 다음 형제 노드(button)
+        console.log(x.previousElementSibling); // 이전 형제 노드 (null)
+
+        console.log(x.parentElement.children); // td의 자식들  (button * 2)
+        console.log(x.parentElement.parentElement); // tr
+        console.log(x.parentElement.parentElement.firstElementChild); // tr의 첫번째 자식 : td (button을 자식으로 가진)
+        console.log(x.parentElement.parentElement.lastElementChild); // tr의 마지막 자식 : td ( 날짜 )
+
+        // 해당 태그에서 사용 가능한 속성을 보고자 할 때 : dir
+        */
+        var tbody = document.querySelector(".table"); // 부모태그
+        var current = x.parentElement.parentElement; // tr ( 현재 태그 )
+        var next = current.nextElementSibling; // tr ( 다음 태그(행) )
+
+        // console.log(current, next);
+        // next(다음 행)이 null일 때 오류 발생
+        // 다음 행이 null 일 때, alert(경고) 가 실행되게 작성
+        if (next === null) {
+          alert("가장 마지막 행 입니다");
+        } else {
+          // 현재 행을 기준으로 다음 행을 앞에 추가한다
+          tbody.insertBefore(next, current);
+        }
+      }
+
+      function up(x) {
+        // 기준 노드 앞에 삽입 노드를 이동
+        // 부모님태그.insertBefore(삽입할 노드, 기준이 될 노드);
+
+        // 부모 태그
+        var tbody = document.querySelector(".table");
+        // 삽입 할 토드
+        var current = x.parentElement.parentElement; // tr ( 2번 부모를 올라갔다 )
+        // 기준이 될 토드
+        var prev = current.previousElementSibling; // 이전 행
+
+        // console.log(current, prev);
+        // 이전 행을 기준으로 앞에 추가한다 -> 앞으로 이동 : 이전 행이 null 일 때, 가장 뒤로 이동한다
+        // 이전 행이 null 일 때, alert(경고) 가 실행되게 작성
+        if (prev === null) {
+          alert("가장 처음 행입니다");
+        } else {
+          tbody.insertBefore(current, prev);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>클래스 속성제어</h3>
+    <h6>JS를 이용해 HTML 태그의 클래스를 제어할 수 있다(id도 변경가능)</h6>
+
+    <button type="button" class="btn btn-default" id="btn">클래스 변경</button>
+
+    <script>
+      var btn = document.getElementById("btn");
+      btn.onclick = function () {
+        // btn의 아이디를 변경
+        // btn.id = "xxxxx";
+        // 클래스는 이 방법으로 변경되지 않는다
+        // btn.class = "xxxxx";
+        // 클래스를 변경하는 특별한 방법을 제공 해준다
+
+        // console.dir(btn);
+
+        console.log(btn.className); // 문자열 형태로 클래스 이름을 반환한다
+        // 단일 값을 얻어 사용하고 싶다면 className
+        console.log(btn.className); // 클래스 이름을 문자열로 반환
+        // classList : 값이 많다면 classList를 사용한다
+        console.log(btn.classList); // 클래스 이름을 배열형태로 반환
+
+        btn.classList.add("a"); // 클래스 리스트에 a 클래스 추가
+        btn.classList.remove("btn"); // btn 클래스 삭제
+
+        console.log(btn.classList.contains("a")); // a클래스가 있다면 true반환 or false
+
+        btn.classList.toggle("xxx"); // xxx클래스가 없다면 추가, 있으면 제거 : toggle
+      };
+    </script>
+
+    <hr />
+    <h3>
+      토글 버튼 = 하나의 버튼으로 2가지 이상의 기능을 하는 버튼 <br />
+      (클래스를 추가 or 제거하는 형태로 사용)
+    </h3>
+    <!-- 버튼을 추가하면 class 이름이 추가, 제거 되면서 여러 기능을 하는 버튼 -->
+
+    <style>
+      .x {
+        display: block;
+        width: 150px;
+        height: 100px;
+        border: 1px solid #777;
+        text-align: center;
+        line-height: 100px;
+      }
+      /* 클래스 a 가 있으면 background-color가 바뀌고, 없으면 color 없어짐 */
+      .a {
+        background-color: tomato;
+      }
+    </style>
+
+    <a href="#" id="x" class="x">마우스 오버 영역</a>
+
+    <script>
+      var x = document.getElementById("x");
+      // onmouseover : 마우스가 위에 올라오면 이벤트 실행
+      x.onmouseover = function () {
+        console.log("마우스 진입");
+        // 마우스가 진입하면 클래스에 a 를 추가
+        x.classList.add("a");
+      };
+      // onmouseout : 마우스가 나갈 때 이벤트 실행
+      x.onmouseout = function () {
+        console.log("마우스 아웃");
+        // 마우스가 아웃하면 클래스의 a 를 제거
+        x.classList.remove("a");
+      };
+    </script>
+
+    <hr />
+
+    <button type="button" id="btn2">토글버튼</button>
+
+    <script>
+      var btn2 = document.getElementById("btn2");
+      btn2.onclick = function () {
+        // b클래스가 있다면
+        if (btn2.classList.contains("b")) {
+          btn.classList.remove("b"); // 제거
+          document.body.style.backgroundColor = "white"; // 전체 웹페이지의 색깔을 화이트로
+          // b클래스가 없다면
+        } else {
+          btn2.classList.add("b");
+          document.body.style.backgroundColor = "yellow";
+        }
+      };
+    </script>
+  </body>
+</html>
