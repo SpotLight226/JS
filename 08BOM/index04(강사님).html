@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .bgImg {
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 애니메이션이 새롭게 적용하려면, img 태그를 새롭게 생성 -->
+    <div class="slide">
+      <img src="img/slide1.jpg" class="bgImg" />
+    </div>
+
+    <script>
+      setInterval(changeImg, 2000);
+
+      var num = 1;
+      function changeImg() {
+        //2초 마다 이미지 태그생성
+        var img = document.createElement("img");
+        img.src = "img/slide" + ++num + ".jpg";
+        img.classList.add("bgImg");
+
+        //기존 이미지 삭제
+        var slide = document.querySelector(".slide");
+        // 부모 태그의 첫번째 자식을 지운다
+        slide.removeChild(slide.firstElementChild);
+
+        //생성한 이미지 추가
+        slide.appendChild(img);
+
+        if (number === 4) number = 0;
+      }
+    </script>
+  </body>
+</html>

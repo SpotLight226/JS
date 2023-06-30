@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3 class="stopTimeout">여기를 누르면 경고창이 안 나와</h3>
+
+    <script>
+      //setInterval 과 사용 방법이 동일
+      // number을 반환한다 -> id
+      // 함수(function) 을 5초 뒤에 실행
+      /*
+      var stop = setTimeout(function () {
+        alert("5초 뒤에 실행~!!!");
+      }, 5000);
+      */
+      var stopTimeout = document.querySelector(".stopTimeout");
+      stopTimeout.onclick = function () {
+        // setTimeout의 반환값을 넣는다
+        clearTimeout(stop);
+        alert("중지 되었슴다~");
+      };
+
+      ////////////////////////
+      // 즉시 실행이 되어버린다
+      //   setTimeout(test("hello world"), 5000);
+
+      // test 함수의 매개변수를 3번째 인자로 넣을 수 있다
+      //   setTimeout(test, 5000, "hello world");
+
+      // test 함수는 함수를 반환하므로 5초 뒤에 내부 함수가 호출된다
+      // => setTimeout 은 내부 함수를 조작한다
+      setTimeout(test("hello"), 5000);
+      function test(x) {
+        return function () {
+          alert("타이밍 펑션~~~!!" + x);
+        };
+      }
+    </script>
+  </body>
+</html>

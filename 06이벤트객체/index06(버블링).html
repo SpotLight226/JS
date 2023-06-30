@@ -41,13 +41,15 @@
       var func1 = document.querySelector(".func1");
       var func2 = document.querySelector(".func2");
       var func3 = document.querySelector(".func3");
+      // 올라가면서 모든 이벤트를 실행한다
+      // ex) 3 클릭시, func3 -> func2 -> func1
       /*
       func1.onclick = function () {
         alert("func1 실행");
       };
       func2.onclick = function () {
         alert("func2 실행");
-        // event.stopPropagation(); // 이벤트 전파를 막음(버블링 중단)
+        // event.stopPropagation(); // 이벤트 전파를 막음(버블링 중단 : 3을 클릭하면 func2까지만 실행된다)
       };
       func3.onclick = function () {
         alert("func3 실행");

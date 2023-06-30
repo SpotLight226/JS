@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="stopInterval">인터벌 중지</button>
+
+    <script>
+      // window.setInterval() 에서 window는 생략 가능
+
+      // setInterval(함수, 시간(밀리세컨드)) : 함수를 일정 시간마다 실행
+      // setInterval 은 number을 반환한다 => number === id
+      // 함수를 1초마다 실행
+      var stop = setInterval(function () {
+        console.log(1);
+      }, 1000);
+
+      // 인터벌 중지
+      var stopInterval = document.getElementById("stopInterval");
+      stopInterval.onclick = function () {
+        // setInterval에서 반환된 number(id)를 넣는다
+        clearInterval(stop); // setInterval이 반환하는 아이디값
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form name="actionForm">
+      <h3>가입창</h3>
+
+      이름:<input type="text" name="name" />
+
+      번호:<input type="text" name="phone" onblur="phoneFunc()" />
+      분야:
+      <input type="checkbox" name="check" />CSS
+      <input type="checkbox" name="check" />JS
+      <input type="checkbox" name="check" />HTML
+
+      <input type="submit" value="확인" id="btn" />
+    </form>
+
+    <script>
+      //   document.querySelector('input[name="name"]'); // input 태그에 name으로 접근하는 방법 중 하나
+      /*
+        form 태그는 document의 자식 중 하나로 유일하게 name속성으로 접근 가능
+        input 태그는 form 태그의 자식으로 다시 name속성으로 접근 가능
+    */
+      //   console.log(document.actionForm); // form태그는 name으로 접근 가능하다
+      //   console.log(document.actionForm.name); // input 태그 중 name === "name" 인 속성(요소 Element)
+
+      //submit 버튼
+      var btn = document.getElementById("btn");
+      btn.onclick = function () {
+        // submit의 고유 이벤트를 중단
+        event.preventDefault();
+
+        // submit을 전송하기 전, 각 input태그의 값을 검사
+        // name 태그의 값이 공백일 때
+        if (document.actionForm.name.value === "") {
+          alert("아이디는 필수 입니다");
+          document.actionForm.name.focus(); // name 태그에 포커스
+          return; // submit 이벤트를 종료 ( 함수 종료 )
+
+          // name이 phone인 input태그
+          // phone 태그의 값의 길이가 11이 아니라면
+        } else if (document.actionForm.phone.value.length !== 11) {
+          alert("번호는 -없이 11글자 입니다");
+          document.actionForm.phone.focus();
+          return;
+
+          // checkbox의 체크 여부
+        } else {
+          // 체크 개수 저장할 변수
+          var cnt = 0;
+          // checkbox 가져옴 -> form태그의 checkbox를 배열로 가져옴
+          var check = document.actionForm.check;
+          // 반복문으로 check여부 확인
+          for (var i = 0; i < check.length; i++) {
+            // 체크 되어 있다면
+            if (check[i].checked) {
+              cnt++;
+            }
+          }
+
+          if (cnt === 0) {
+            alert("분야는 적어도 1개의 옵션을 선택하세요");
+            return;
+          }
+
+          // form.submit();
+          document.actionForm.submit();
+        }
+
+        console.log(1);
+      };
+
+      function phoneFunc() {
+        //   document.actionForm.phone.value  = document.actionForm.phone.value.replaceAll("-", "");
+        var phone = document.querySelector("input[name='phone']"); // name 속성이 phone인 태그
+
+        phone.value = phone.value.replaceAll("-", ""); // phone 태그의 값에서 '-' 을 공백으로 변경
+      }
+    </script>
+  </body>
+</html>
