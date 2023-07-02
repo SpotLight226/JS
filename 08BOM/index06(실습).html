@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .box {
+        display: flex;
+      }
+      .Timer {
+        margin-right: 5px;
+      }
+      .setTimer {
+        margin: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>네이버 타이머 도전하기</h3>
+
+    조건 <br />
+    1. select태그는 시간:99 or 분:60 or 초:60으로 화면이 생성될 때 엘리먼트
+    생성기법으로 처리 <br />
+    2. 시간설정 버튼으로 클릭하면 시간이 세팅됨 <br />
+    3. 타이머시작버튼은 토글형태로 타이머가 동작 중이라면 일시정지 버튼으로
+    활성화 <br />
+    4. 사용자가 버튼을 잘못 클릭하는 경우를 고려하여, 어떠한 경우라도 중복으로
+    타이밍이 발생되면 안됨
+
+    <h3>시간을 선택하세요</h3>
+
+    <div class="box">
+      <div class="Timer"></div>
+
+      <div>
+        <button type="button" class="timeSet">시간설정</button>
+        <button type="button" class="timerStart">타이머시작</button>
+      </div>
+    </div>
+
+    <h2 class="time">00:00:00</h2>
+
+    <script>
+      var Timer = document.querySelector(".Timer");
+
+      var hour = document.createElement("select");
+      var minute = document.createElement("select");
+      var second = document.createElement("select");
+
+      hour.classList.add("setTimer");
+      minute.classList.add("setTimer");
+      second.classList.add("setTimer");
+
+      var timeSet = document.querySelector(".timeSet");
+      var timerStart = document.querySelector(".timerStart");
+      var selectTime;
+      var time = document.querySelector(".time");
+
+      // 각 select 태그를 만들어 옵션을 넣고, 기본값을 설정해줌
+      function hourSetOption() {
+        for (var i = 0; i <= 99; i++) {
+          var option = document.createElement("option");
+          var value = ("0" + i).slice(-2);
+          option.value = value;
+          option.innerHTML = value;
+          if (i === 99) {
+            option.selected = "selected";
+          }
+          hour.appendChild(option);
+        }
+      }
+      function msSetOption() {
+        for (var i = 0; i <= 60; i++) {
+          var option = document.createElement("option");
+          var option2 = document.createElement("option");
+          var value = ("0" + i).slice(-2);
+          option.value = value;
+          option.innerHTML = value;
+          option2.value = value;
+          option2.innerHTML = value;
+          if (i === 60) {
+            option.selected = "selected";
+            option2.selected = "selected";
+          }
+          minute.appendChild(option);
+          second.appendChild(option2);
+        }
+      }
+      hourSetOption();
+      msSetOption();
+      Timer.appendChild(hour);
+      Timer.appendChild(minute);
+      Timer.appendChild(second);
+
+      ///////시간 설정
+      timeSet.addEventListener("click", function () {
+        var setH = hour.value * (1000 * 60 * 60);
+        var setM = minute.value * (1000 * 60);
+        var setS = second.value * 1000;
+
+        time.innerHTML = hour.value + ":" + minute.value + ":" + second.value;
+        selectTime = setH + setM + setS; // 선택된 시간을 밀리세컨드로 세팅
+      });
+
+      //// 시간 감소
+      function timerfunc() {}
+    </script>
+  </body>
+</html>
