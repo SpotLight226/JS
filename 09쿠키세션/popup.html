@@ -4,46 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="popup.js"></script>
   </head>
   <body>
     팝업창 <br />
     <input type="checkbox" class="popupCheck" /> 오늘하루 이 창을 열지 않기
 
-    <button class="popupClose">닫기</button>
-
     <script>
-      var popupClose = document.querySelector(".popupClose");
-
-      // 체크박스 변수
       var popupCheck = document.querySelector(".popupCheck");
-
-      popupClose.addEventListener("click", function () {
-        // 만약 popupCheck가 true라면
-        if (popupCheck.checked) {
-          // 쿠키 생성 함수를 실행한다
-          addCookie();
-        }
+      popupCheck.addEventListener("click", function () {
+        // 쿠키 생성 함수 호출
+        addCookie("popup_check", true);
+        // 창 닫기
         window.close();
       });
-
-      function addCookie() {
-        // 만료시간 설정
-        var date = new Date();
-        // 1분으로 설정
-        date.setDate(date.getMinutes() + 1);
-
-        // 쿠키를 설정
-        // 키는 check, 값은 체크박스의 값을 넣는다
-        var cookie =
-          "check=" +
-          popupCheck.checked +
-          "; " +
-          date.toUTCString() +
-          "; path=/";
-
-        // 쿠키 생성
-        document.cookie = cookie;
-      }
     </script>
   </body>
 </html>

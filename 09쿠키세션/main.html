@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="popup.js"></script>
   </head>
   <body>
     <h3>메인창</h3>
@@ -13,26 +14,15 @@
     <script>
       // 페이지가 시작되면 팝업창을 띄워준다
       // 사용자가 오늘 하루 이 창을 열지 않기를 클릭하면 쿠키를 생성하고, 쿠키가 있다면 다음 접속시에 팝업창을 띄우지 않는다
-
-      var cookieList = document.cookie.split("; ");
-      console.log(document.cookie);
-      if (cookieList.length != 0) {
-        for (var i = 0; i < cookieList.length; i++) {
-          if (cookieList[i].indexOf("check=") === -1) {
-            window.open(
-              "popup.html",
-              "mainPopup",
-              "width = 300px, height = 400px, left=100px, top=200px"
-            );
-          }
-        }
-      } else {
+      // getCookie() 를 실행했을 때, true가 아니라면
+      if (getCookie() !== true) {
         window.open(
           "popup.html",
-          "mainPopup",
-          "width = 300px, height = 400px, left=100px, top=200px"
+          "메인팝업창",
+          "width = 300px, height = 400px, left=100px, top=100px"
         );
       }
+      // 아니라면 아무것도 안 띄움
     </script>
   </body>
 </html>
