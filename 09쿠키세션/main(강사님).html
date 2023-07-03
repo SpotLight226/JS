@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="popup(강사님).js"></script>
+  </head>
+  <body>
+    <h3>메인</h3>
+
+    <script>
+      // getCookie 를 호출
+      // 쿠키가 없을 때,
+      if (getCookie("main_popup") !== true) {
+        // 팝업창 띄움
+        window.open(
+          "popup(강사님).html",
+          "메인팝업",
+          "width = 200px, height = 200px, left = 100px, top=200px"
+        );
+      }
+    </script>
+  </body>
+</html>

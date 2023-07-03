@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // navigator 객체 = 브라우저의 정보
+      //   console.log(navigator);
+      console.log(navigator.userAgent);
+      //   console.log(navigator.appName);
+
+      // userAgent 는 문자열
+      // 사용자의 접속한 브라우저 정보를 확인 가능
+      var agent = navigator.userAgent.toLowerCase(); // 소문자로 변환
+
+      // -1 이 아니라면 == true
+      if (agent.indexOf("firefox") != -1) {
+        console.log("firefox로 접속");
+        // edge, safari, chrome은 동일엔진을 사용하기 때문에 역순배치
+      } else if (agent.indexOf("edg") != -1) {
+        console.log("edge로 접속");
+      } else if (agent.indexOf("chrome") != -1) {
+        console.log("crome으로 접속");
+      }
+    </script>
+  </body>
+</html>

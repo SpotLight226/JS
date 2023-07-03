@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    쿠키이름:<input type="text" id="cookieName" />
+
+    쿠키값:<input type="text" id="cookieValue" />
+
+    <button id="createCookie">쿠키 생성</button>
+
+    찾을쿠키:<input type="text" id="cookieFind" />
+    <button id="findCookie">쿠키찾기</button>
+
+    <script>
+      // 쿠키를 생성하는 규칙 (키=값; 키=값;.....; expires=시간(만료시간);)
+      //   document.cookie =
+      //     "xxx=aaa123; expires=" + new Date(2023, 7, 4).toUTCString() + ";";
+
+      // 쿠키를 생성할 때는 함수로 함
+      function addCookie() {
+        var name = document.getElementById("cookieName").value;
+        var value = document.getElementById("cookieValue").value;
+
+        //만료시간
+        var date = new Date(); // 현재시간
+        date.setDate(date.getDate() + 7); // 현재 날짜 + 7 로 설정
+
+        // 문자열 합치기
+        var cookie = "";
+        cookie += name + "=" + value + "; ";
+        // 나라별로 시간이 다를 수있으니 UTCString으로 변환
+        cookie += "expires=" + date.toUTCString() + "; path=/"; // 쿠키가 만들어진 하위경로에서도 해당쿠키 사용 가능
+
+        // 쿠키생성
+        document.cookie = cookie;
+      }
+
+      // 버튼에 쿠키생성 이벤트를 건다
+      var createCookie = document.getElementById("createCookie");
+      // addCookie 함수를 이벤트로
+      createCookie.onclick = addCookie;
+
+      //////////////쿠키 찾기
+      // 쿠키를 찾는 함수
+      function getCookie() {
+        // 쿠키를 찾으면 문자열형태로 반환된다
+        // console.log(document.cookie);
+
+        var find = document.getElementById("cookieFind").value; // 사용자가 입력한 값
+
+        // ; 으로 구분되기 때문에 split으로 나눈다 ( 배열로 반환 )
+        var arr = document.cookie.split("; "); // ; 를 기준으로 나눔 (뒤에 공백이 있기때문에 '; ' 으로 나눔  )
+        // console.log(arr); // 배열
+
+        // 쿠키가 있다면
+        if (arr.length != 0) {
+          // 반복문을 돌린다
+          for (var i = 0; i < arr.length; i++) {
+            // 예시
+            // -1 이 아니라면 있다는 뜻
+            if (arr[i].indexOf(find + "=") != -1) {
+              //   console.log(find + "키가 있다");
+              // 'xxx=' 을 공백으로 바꾸어 value만 남게한다
+              console.log("키: " + find);
+              console.log("값: " + arr[i].replace(find + "=", ""));
+            }
+          }
+        }
+      }
+
+      var findCookie = document.getElementById("findCookie");
+      findCookie.onclick = getCookie;
+
+      // 쿠키 삭제 = 동일한 키로 expires를 현재시간으로 맞춘다
+    </script>
+  </body>
+</html>

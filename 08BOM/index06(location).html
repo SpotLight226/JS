@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 이전 -->
+    <!-- <button onclick="location.href='#'" id="btn">이동</button> -->
+
+    <!-- location 객체 사용 -->
+    <button id="btn">이동</button>
+    <!-- 앞으로 가기 -->
+    <!-- history.forward() 와 동일 -->
+    <button onclick="history.go(1)">앞으로 가기</button>
+
+    <script>
+      var btn = document.getElementById("btn");
+      btn.onclick = function () {
+        // JS 로 페이지 이동
+        location.href = "index06(앞으로,뒤로).html";
+
+        //replaceState - 기록을 변경
+        // 객체(데이터), 제목, URL
+        // 앞으로 이동하면, replaceState를 타게된다 => 즉, 넘어갔다는 중요한 단서
+        // 제목, url 은 변경하지않고, data만 변경함
+        history.replaceState({ data: "x" }, null, null);
+      };
+      // replaceState 로 저장한 데이터를 확인할 수 있음
+      console.log(history.state);
+
+      /* 이 페이지를 처음 진입시, 경고창
+         => 이 경고창을 제어하려면 replaceState를 사용 */
+      // 페이지 실행시, 처음은 null -> 한번 이동하면, {data: x} 가 된다
+      // 이동하면 history.state 에 {data : x} 객체가 저장되어 null이 아니게 된다
+      if (history.state === null) {
+        alert("이 경고창은 처음만 실행된다!?");
+      }
+
+      // reload는 새로고침
+      // 밑의 함수는 5초마다 새로고침하는 함수
+      // 웬만하면 사용하지 말것
+      /*
+      setInterval(function () {
+        location.reload();
+      }, 5000);
+      */
+    </script>
+  </body>
+</html>

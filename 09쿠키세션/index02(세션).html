@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>
+      로컬 스토리지 vs 세션 스토리지는 브라우저 내에 키=값 을 저장하는
+      브라우저측 세션이다
+      <br />
+      로컬 스토리지 = 브라우저를 종료하더라도 영구적으로 유지된다
+      <br />
+      세션 스토리지 = 브라우저를 종료하면 사라진다
+    </h3>
+    <h6>
+      일반적인 사용방법은 세션을 사용하는 것과 동일하다 <br />
+
+      로컬 스토리지 : 영구 저장 <br />
+      세션 스토리지 : 브라우저 종료하면 사라짐<br />
+      사용법은 둘이 동일
+    </h6>
+
+    <button id="createSession">세션만들기</button>
+    <button id="getSession">세션값 확인하기</button>
+    <button id="removeSession">세션삭제하기</button>
+
+    <script>
+      var createSession = document.getElementById("createSession");
+
+      createSession.onclick = function () {
+        // 로컬 스토리지
+        // setItem() : 다 문자열만 사용
+        // 키는 중복을 허용하지 않기때문에, 같은 이름 키를 저장한다면, 덮어씌워진다
+        localStorage.setItem("aaa", "홍길동");
+        localStorage.setItem("bbb", "이순신");
+        // 배열을 JSON문자열로 변환시켜 저장
+        localStorage.setItem("ccc", JSON.stringify([1, 2, 3, 4, 5]));
+      };
+
+      // 값을 조회
+      var getSession = document.getElementById("getSession");
+      getSession.onclick = function () {
+        // .lenth => 저장된 키의 개수
+        console.log("로컬스토리지 크기: " + localStorage.length);
+        // 로컬 스토리지의 키 를 하나 가져옴 -> 배열이므로, 인덱스로 핸들링
+        console.log("로컬스토리지 key: " + localStorage.key(1));
+        // getItem() : 키를 문자열로 입력하면 value를 반환한다
+        var result = localStorage.getItem("ccc"); // 키를 넣으면 값을 반환
+        console.log(result);
+      };
+
+      // 세션 지우기
+      var removeSession = document.getElementById("removeSession");
+      removeSession.onclick = function () {
+        // removeItem( 문자열 ) -> () 안에 키를 문자열 형태로 넣는다 : 하나씩 삭제
+        localStorage.removeItem("aaa"); // aaa키 삭제
+
+        //clear() : 전체 삭제
+        // localStorage.clear();
+      };
+    </script>
+  </body>
+</html>

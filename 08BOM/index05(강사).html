@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        background-size: cover;
+      }
+      .bgImg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /*z방향 가장 아래로*/
+        animation: fadeIn 0.5s linear; /*아래 키프레스 fadeIn호출*/
+      }
+
+      .clock h2 {
+        color: #fff;
+        text-align: center;
+        margin-top: 300px;
+      }
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <!-- background-image 로 넣을 시, 애니메이션이 작동 X -->
+  <body
+    data-img='{"1": "img/1.jpg", "2":"img/2.jpg", "3": "img/3.jpg", "4": "img/4.jpg"}'
+  >
+    <!-- Object의 길이를 확인하는 문법은 검색 -->
+    <!-- 
+        배경을 넣을 이미지의 형태 <img class="bgImg" src="##"> 
+        를 body의 하위자식으로 추가하는 방향으로 코드를 작성하세요.
+    -->
+
+    <div class="clock">
+      <h2>00:00:00</h2>
+    </div>
+
+    <script>
+      // clock블럭의 자식인 h2
+      var clock = document.querySelector(".clock > h2");
+      // img 생성시 조절할 변수
+      var count = 0;
+
+      // 이미지를 생성하는 함수
+      function createImg() {
+        // JSON 문자열
+        var data = document.body.dataset.img;
+        // JSON 문자열을 객체로 변환
+        var obj = JSON.parse(data);
+
+        //img 생성
+        var img = document.createElement("img");
+        // obj 배열에서 인덱스 ++count인 요소를 src로
+        img.src = obj[++count];
+        img.classList.add("bgImg");
+
+        document.body.appendChild(img);
+        // count를 다시 0으로
+        /*
+        if (count === 4) {
+          count = 0;
+        }
+        */
+        // 위와같이 써도 되지만 obj의 길이를 이용하는 방법
+        // Object.keys(객체이름).length
+        if (Object.keys(obj).length === count) count = 0;
+      }
+
+      // 즉시 실행 함수
+      (function () {
+        // 처음 실행해서 하나 넣고 밑에 실행
+        createImg();
+        // 2초마다에 setInterval이 실행
+        setInterval(createImg, 2000);
+        // 시간 생성
+        createTime();
+        // 1초마다 createTime이 실행
+        setInterval(createTime, 1000);
+      })();
+
+      // 시간
+      function createTime() {
+        // date객체 생성
+        var date = new Date();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+
+        var result =
+          (hour < 10 ? "0" + hour : hour) +
+          ":" +
+          (minute < 10 ? "0" + minute : minute) +
+          ":" +
+          (second < 10 ? "0" + second : second);
+        clock.innerHTML = result;
+      }
+    </script>
+  </body>
+</html>
