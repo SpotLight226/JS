@@ -25,7 +25,7 @@
       var list = document.querySelector(".list");
       list.addEventListener("click", function () {
         if (event.target.tagName === "IMG") {
-          createSesseion(event.target.src);
+          setSession(event.target.getAttribute("src"));
         }
       });
     </script>
