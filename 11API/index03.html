@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>리다이렉트 된 결과(서버 상태여야 한다)</h3>
+
+    <script>
+      /*
+      JS 방식으로 사용하려면 있어야 한다
+      rest API 방식이라 없어도 OK
+      // skd 를 사용하기 위해 초기화
+      // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해야 합니다.
+      // Kakao.init("4b46456aa14ecf1c64a346932935c2b1");
+
+      // SDK 초기화 여부를 판단합니다.
+      // console.log(Kakao.isInitialized());
+      */
+      // 카카오 서버에서 인가 코드를 url주소에 담아서 보내준다 (get방식)
+      // 3. 인가코드 얻기
+      // 본래는 잘 사용 안함 : 이번 예시로 사용
+      var urlSearch = new URLSearchParams(location.search);
+      // 키가 code 인 값을 가져옴
+      var value = urlSearch.get("code");
+
+      // 4번. 토큰
+      // 인가코드가 있다면 토큰을 발급받는다
+      if (value !== null) {
+        ajax();
+      }
+
+      // 토큰을 발급받는 함수
+      function ajax() {
+        var uri = "http://127.0.0.1:5500/11API/index03.html";
+        var key = "087988d5534ff6ed6feb594f68e983e3";
+        // form 데이터 형식
+        /*
+        var data = "grant_type=authorization_code" +
+                   "&client_id=" + 값 +
+                   "&redirect_uri=" + 값 +
+                   "&code=" + 인가코드 */
+        var data =
+          "grant_type=authorization_code" +
+          "&client_id=" +
+          key +
+          "&redirect_uri=" +
+          uri +
+          "&code=" +
+          value;
+        // 토큰 요청
+        fetch("https://kauth.kakao.com/oauth/token", {
+          // method: "post",
+          // headers: {
+          //   "Content-Type": "요청의 타입",
+          // },
+          // body : 데이터
+          method: "post",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+          },
+          body: data,
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            //세션 만들기
+            // 브라우저 종료시 모두 삭제
+            // 쿠키 & 세션스토리지에 토큰 값
+            // 이건 우리가 사용하기위해 저장
+            sessionStorage.setItem("kakao_access", data.access_token);
+
+            // 사용자 정보 API호출하기
+            getUser(data.access_token);
+          });
+      }
+
+      // 5번 토큰 기반으로 API호출하기 JS로 처리
+      // REST API
+      function getUser(token) {
+        fetch("https://kapi.kakao.com/v2/user/me", {
+          method: "post",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+          },
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            // 이렇게 하면, 카카오가 가지고 있는 정보를 가지고 온 것이다
+            // 서비스 서버에서의 회원가입은 개발자가 구현해야 한다
+            console.log(data);
+          });
+      }
+    </script>
+  </body>
+</html>

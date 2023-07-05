@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 링크 걸어주기 -->
+    <link rel="stylesheet" href="css/swiper.css" />
+    <link rel="stylesheet" href="css/index01.css" />
+    <script src="js/swiper.js"></script>
+  </head>
+  <body>
+    <!-- 스와이퍼 -> 캐러셀 : 옆으로 이동하는 div -->
+    <!-- swiperjs.com
+         1. install from NPM : nord.js
+         2. Use Swiper from CDN : link걸어서 사용
+            => 각 주소에 들어가서 다른 이름으로 저장한 뒤, 폴더에 넣는다  -->
+    <!-- resource -> demo -> element 에서 코드를 볼 수 있다 -->
+    <!-- 사용하고 싶지 않은 요소는 js와 HTMl에서 둘 다 지워야 함 -->
+
+    <!-- Slider main container -->
+    <div class="swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        ...
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+    <script src="js/index01.js"></script>
+  </body>
+</html>

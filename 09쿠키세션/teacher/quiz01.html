@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>localStorage를 이용하여 마지막에 클릭한 2개의 정보를 불러오기</h3>
+
+    <div class="list">
+      <img src="../img/1.jpg" width="300" />
+      <img src="../img/2.jpg" width="300" />
+      <img src="../img/3.jpg" width="300" />
+      <img src="../img/4.jpg" width="300" />
+    </div>
+
+    <button type="button" onclick="location.href='teacher/quiz01_result.html';">
+      최신정보확인하기
+    </button>
+
+    <script>
+      var list = document.querySelector(".list");
+      ㅣ;
+      list.addEventListener("click", function () {
+        if (event.target.tagName != "IMG") {
+          return;
+        }
+        // 빈 배열을 만듬
+        var arr = new Array(0); // arr = []
+
+        // 기존 로컬 스토리지가 있다면 가져와서 arr을 변경
+        if (localStorage.getItem("like") !== null) {
+          // JSON문자열을 가져와서 객체 ( 배열 형태 )로 만들어 arr에 덮어쓴다
+          arr = JSON.parse(localStorage.getItem("like"));
+        }
+
+        if (arr.length >= 2) {
+          arr.shift(); // 앞에서 하나를 제거
+        }
+
+        // 배열에 대상의 src를 넣는다
+        arr.push(event.target.src);
+        // 순수한 문자열로 만들어서 넣는다
+        localStorage.setItem("like", JSON.stringify(arr));
+      });
+    </script>
+  </body>
+</html>

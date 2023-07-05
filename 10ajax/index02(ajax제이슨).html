@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //json 데이터 읽기
+      //json 작성시, 숫자, 배열 을 제외하고 모두 ""로 묶는다
+      fetch("hi.json")
+        .then((response) => {
+          // json을 객체로 반환
+          return response.json();
+        })
+        // JSON.parse 처리를 자동으로 해서, Object 로 반환한다
+        .then((data) => {
+          console.log(data);
+        });
+
+      // XML데이터 읽기
+      fetch("hi.xml")
+        .then((response) => {
+          // 1. 일단 문자열로 변경
+          return response.text();
+        })
+        .then((data) => {
+          //2. 문자열을 xml타입으로 변경
+          // new DOMParser().parseFromString( <변경할 문자열> , < 형식 >) : 리턴 xml타입
+          return new DOMParser().parseFromString(data, "text/html");
+        })
+        .then((data) => {
+          // xml 타입에서 태그 명이 data인 모든 태그를 가져온다 : 배열 형태
+          var arr = data.getElementsByTagName("data");
+
+          for (var i = 0; i < arr.length; i++) {
+            // 태그 명이 data인 요소에서 내부 자식의 태그 명으로 접근해서 innerHTML을 가져온다
+            console.log(arr[i].querySelector("name").innerHTML);
+          }
+        });
+
+      // JSON 데이터가 훨씬 더 편하다
+    </script>
+  </body>
+</html>

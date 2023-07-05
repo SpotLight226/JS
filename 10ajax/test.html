@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 클릭할 때마다 새로운 데이터 가져와서 10개 더보기 or 리뷰 더보기 등을 만들 수 있다 -->
+    <!-- 공공 데이터는 API사용 신청을 해야한다 -->
+    <!-- 테스트 시에는 localhost 주소 를 사용 URL로 입력하고 신청한다 -->
+    <!-- 명세서를 다운로드하여 사용방법을 알 수 있다 : 만약 API를 만들면 작성해줌 -->
+
+    <button type="button" id="btn">데이터 가져오기</button>
+    <ul class="location-list"></ul>
+
+    <script>
+      var btn = document.getElementById("btn");
+      // btn에 이벤트
+      btn.addEventListener("click", function () {
+        // 1일 때 1~10, 2일 떄 11~20, 3일 때 21~30
+        // 클릭시 다음데이터
+        pageNum++;
+        ajax(pageNum);
+      });
+
+      //  공공 자건거 API키: 6f704b556c776b643931727362784f
+      // 샘플: http://openapi.seoul.go.kr:8088/(인증키)/json/bikeList/1/5/
+      // 에러가 뜨면 주소가 잘못됬거나 공공서버 문제
+
+      //
+      function ajax(page) {
+        // end는 page * 10
+        var end = page * 10;
+        // start 는 end -9 ( end=10 start=1, end=20 start=11 ...)
+        var start = end - 9;
+        // start와 end 변수가 주소에 들어감
+        fetch(
+          "http://openapi.seoul.go.kr:8088/6f704b556c776b643931727362784f/json/bikeList/" +
+            start +
+            "/" +
+            end +
+            "/"
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((result) => {
+            var list = document.querySelector(".location-list");
+            console.log(result.rentBikeStatus.row);
+            for (var i in result.rentBikeStatus.row) {
+              var location = document.createElement("li");
+              location.innerHTML = result.rentBikeStatus.row[i].stationName;
+              list.appendChild(location);
+            }
+          });
+      }
+
+      //즉시실행함수
+      // 최초 1번 호출
+      var pageNum = 1;
+
+      (function () {
+        // ajax에 pageNum을 매개변수로 전달
+        ajax(pageNum);
+      })();
+    </script>
+  </body>
+</html>

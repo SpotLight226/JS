@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .movieList {
+        display: flex;
+        flex-wrap: wrap;
+
+        width: 1800px;
+        padding: 30px;
+        margin: 0 auto;
+      }
+
+      .movieList .movie {
+        flex-basis: 33.3333%;
+        /* img의 부모인 movie 박스에 relative */
+        position: relative;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .movieList .movie img {
+        position: absolute;
+        left: 0;
+        top: -20px;
+      }
+
+      .movieList .movie .inner {
+        padding-left: 250px;
+      }
+      .movieList .movie .summary {
+        /* 높이제한 */
+        height: 200px;
+        /* 넘치는 문자 자름 */
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="movieList">
+      <!-- <div class="movie">
+        <img src="#" />
+        <div class="inner">
+          <h3 class="title">제목</h3>
+          <p class="summary">요약(섬머리)</p>
+          <ul class="genres">
+            <li>장르</li>
+            <li>장르</li>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+
+    <script>
+      // 주소 : https://raw.githubusercontent.com/yopy0817/data_example/master/hello.json
+
+      // 서버의 주소를 넣으면 서버의 데이터를 얻어올 수 있다
+      /*
+      fetch(
+        "https://raw.githubusercontent.com/yopy0817/data_example/master/hello.json"
+      )
+        // JSON 문자열을 객체로 변환
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          console.log(data["bno"]);
+          console.log(data["title"]);
+          console.log(data["content"]);
+        });
+        */
+      /*
+         Open API 를 이용해서 데이터를 받아오기
+         API Endpoints : 접속 위치
+         Endpoint Parameters : 파라미터에 따라 다른 데이터를 가져올 수 있다 url사용 방식, 쿼리파라미터
+                             required 가 x 라면 필수가 아니다
+
+      */
+      // 가지고 올 때, 옵션을 줄 수 있다
+      // 각 옵션은 => 주소?옵션1=값&옵션2=값&.... 형태로 묶을 수 있다
+      fetch(
+        "https://yts-proxy.now.sh/list_movies.json?limit=30&quality=1080p&sort_by=rating"
+      )
+        .then((response) => {
+          // JSON 데이터를 객체로 변환
+          return response.json();
+        })
+        .then((result) => {
+          // Object가 된 데이터를 가져온다
+          //   console.log(data);
+          // 사용 방법
+          // result['data']['movies'] => 배열 형태로 반환된다
+          var movies = result.data.movies;
+
+          //medium_cover_image, title, summary, genres
+
+          var sum = ""; //화면을 그릴 문자열
+          for (var i = 0; i < movies.length; i++) {
+            var img = movies[i].medium_cover_image;
+            var title = movies[i].title;
+            var summary = movies[i].summary;
+            var genres = movies[i].genres;
+            // 동적 화면 전환
+            // 미리 예시로 한 것을 복붙해와서 하나씩 sum += 처리
+            // document.createElement() 를 사용해서 하면, 복잡하기때문에 innerHTML을 활용한다
+            sum += '<div class="movie">';
+            sum += '<img src="' + img + '" />';
+            sum += '<div class="inner">';
+            sum += '<h3 class="title">' + title + "</h3>";
+            sum += '<p class="summary">' + summary + "</p>";
+            sum += '<ul class="genres">';
+            // 향상된 for문 : j는 인덱스다
+            for (var j in genres) {
+              sum += "<li>" + genres[j] + "</li>";
+            }
+            sum += "</ul>";
+            sum += "</div>";
+            sum += "</div>";
+          } // end for
+          document.querySelector(".movieList").innerHTML = sum;
+        });
+    </script>
+  </body>
+</html>

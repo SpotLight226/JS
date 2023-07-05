@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 카카오 SDK 로드 -->
+    <script src="js/kakao.min.js"></script>
+  </head>
+  <body>
+    카카오 API <br />
+    <!-- javascript: 자바 스크립트 함수 -> 자바스크립트 함수를 걸수 있다 -->
+    <!-- 카카오 인증서버가 제공하는 창이 뜬다 -->
+    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
+      <img
+        src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+        width="222"
+        alt="카카오 로그인 버튼"
+      />
+    </a>
+    <p id="token-result"></p>
+
+    <script>
+      /* JavaScript 키 : 4b46456aa14ecf1c64a346932935c2b1 */
+
+      // 1번 카카오 sdk 초기화
+      // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해야 합니다.
+      Kakao.init("4b46456aa14ecf1c64a346932935c2b1");
+
+      // SDK 초기화 여부를 판단합니다.
+      console.log(Kakao.isInitialized());
+
+      // 2번 인가서버 창 띄우기
+      // 실행 결과는 Redirect_URI 로 이동한다
+      function loginWithKakao() {
+        Kakao.Auth.authorize({
+          redirectUri: "http://127.0.0.1:5500/11API/index03.html",
+        });
+      }
+    </script>
+  </body>
+</html>

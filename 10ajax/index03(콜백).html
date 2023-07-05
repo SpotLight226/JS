@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // then 이라는 함수는 f(함수)로 받아서 대신 실행시켜준다
+      // 동기적 콜백
+      /*
+      function then(f) {
+        f("콜백값");
+      }
+      // 콜백함수
+      // 매개변수로 함수를 받아서 실행시켜주고, return으로 함수의 값을 받는다
+      then(function (reponse) {
+        console.log(reponse);
+      });
+      */
+
+      // 비동기적 콜백의 형태
+      // 콜백 함수가 가장 마지막에 실행된다
+      console.log(1);
+
+      function then(f) {
+        // 3초뒤에 실행하는 setTimeout
+        // 매개변수로 들어온 함수를 실행한다
+        setTimeout(() => {
+          f("콜백값");
+        }, 3000);
+      }
+
+      then((response) => {
+        console.log(response);
+      });
+      console.log(2);
+    </script>
+  </body>
+</html>
